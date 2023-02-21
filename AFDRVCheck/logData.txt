@@ -1,0 +1,3888 @@
+Enter ois off function!
+
+OIS OFF success.
+
+Enter unlock debug protect function!
+
+Unlock debug protect success.
+
+Enter write_loop_status function.
+
+Write loop status success.
+
+Enter ois on function!
+
+OIS ON success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter ois off function!
+
+OIS OFF success.
+
+Enter unlock debug protect function!
+
+Unlock debug protect success.
+
+Enter write_loop_status function.
+
+Write loop status success.
+
+Enter ois on function!
+
+OIS ON success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+
+Enter write target_x function!
+
+Write target_x success.
+
+Enter write target_y function!
+
+Write target_y success.
+
+Enter read line out function!
+
+Read line out success.
+

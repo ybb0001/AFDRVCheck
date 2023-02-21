@@ -1,0 +1,90 @@
+
+#ifndef __COMMON_H__
+#define __COMMON_H__
+
+#define I2CMODE_SINGLEADDRDATA	0
+#define I2CMODE_DOUBLEADDR		1
+#define I2CMODE_DOUBLEDATA		2
+
+#define REG_MAX_NUM		4096	//20170330
+
+//typedef enum _FRAME_MODE
+//{
+//	FRAME_MODE_START	= 0,
+//	FRAME_MODE_PREVIEW	= FRAME_MODE_START,
+//	FRAME_MODE_SNAP	    = FRAME_MODE_START+1,
+//	FRAME_MODE_END		= FRAME_MODE_SNAP
+//
+//} FRAME_MODE;
+
+enum FRAME_MODE
+{
+	FRAME_MODE_START = 0,
+	FRAME_MODE_PREVIEW = FRAME_MODE_START,
+	FRAME_MODE_SNAP = FRAME_MODE_START + 1,
+	FRAME_MODE_END = FRAME_MODE_SNAP
+
+} ;
+
+
+enum
+{
+	YCbYCr	= 0,
+	YCrYCb	= 1,
+	CbYCrY	= 2,
+	CrYCbY	= 3,
+	YUV		= 4,
+	RGB565	= 5,
+	MJPEG	= 6,
+	ImageF	= 7,
+	RAW8RG	= 8,
+	RAW8GR	= 9,
+	RAW8GB	= 10,
+	RAW8BG	= 11,
+	RAW10RG	= 12,
+	RAW10GR	= 13,
+	RAW10GB	= 14,
+	RAW10BG	= 15,
+	RAW8DA	= 16,
+	RAW10DA	= 17,
+};
+
+//Display Preview Mode
+#define		DPM_VGA__MD		0x00000001L	// VGA MODE	 	 640 x  480 = 307200
+#define		DPM_HSXG_MD		0x00000002L	// Half SXGA	 640 x  512 = 327680
+#define		DPM_SVGA_MD		0x00000004L	// SVGA MODE	 800 x  600 = 480000
+#define		DPM_XGA__MD		0x00000008L	// XGA MODE		1024 x  768 = 786432
+#define		DPM_XGAP_MD		0x00000010L	// XGA Plus		1152 x  864 = 995328
+#define		DPM_FVGA_MD		0x00000020L	// 4VGA MODE	1024 x  960 = 983040
+#define		DPM_SXGA_MD		0x00000040L	// SXGA MODE	1280 x 1024 = 1310720
+#define		DPM_UXGA_MD		0x00000080L	// UXGA MODE	1600 x 1200 = 1920000
+#define		DPM_QXGA_MD		0x00000100L	// QXGA MODE	2048 x 1536 = 3145728
+#define		DPM_M5MG_MD		0x00000200L	// M5MEGA Mode	2592 x 1944 = 5038848
+#define		DPM_QFVG_MD		0x00000400L	// QFVGA Mode	2560 x 1920 = 4915200
+#define		DPM_M8MG_MD		0x00000800L	// M8MEGA Mode	3264 x 2448 = 7990272
+#define		DPM_M12M_MD		0x00002000L	// M12Mega Mode 4000 x 3000 = 12000000
+
+//#define		DPM_USER0MD		0x00010000L	//User Define Size0-BioMorphic(R65)
+#define		DPM_USER1MD		0x00020000L	//User Define Size1-HV7151SP
+#define		DPM_USER2MD		0x00040000L	//User Define Size2-HV7161SPA1
+#define		DPM_FULL_MD		0x10000000L	//Full Screen MODE
+
+#define		DPM_M1HD_MD		0X00008000L // 1M (HD)		1280 x  720	= 921600
+#define		DPM_WXGA_MD		0X00010000L // WXGA 		1280 x  800	= 1024000
+#define		DPM_M2HD_MD		0X00020000L // 2M (FHD)		1920 x 1080 = 2073600
+#define		DPM_M8HD_MD		0x00004000L // 8M (QFHD)	3840 x 2160 = 7084800
+
+//delay
+void StopWatchms(int start0stop1);
+float IIC_Delayus(float D_Time);
+int IIC_Delay(UINT D_Time);
+//debug
+void DbgPrintf(char* format,...);
+
+//iic & reset signal
+void RST_High();
+void RST_Low();
+
+int WINAPI LoadSettings(LPSTR RegFileName);
+
+#endif	//!defined(__COMMON_H__)
