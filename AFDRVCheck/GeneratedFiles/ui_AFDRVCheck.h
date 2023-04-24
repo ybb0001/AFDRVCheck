@@ -124,6 +124,9 @@ public:
     QPushButton *pushButton_BU24532_Iris_off;
     QPushButton *pushButton_BU24532_Test;
     QPushButton *pushButton_BU24532_Sine;
+    QPushButton *pushButton_BU24721_DC;
+    QPushButton *pushButton_BU24721_Drive;
+    QPushButton *pushButton_BU24532_Life;
     QWidget *tab_4;
     QPushButton *pushButton_DW2;
     QPushButton *pushButton_DW1;
@@ -138,21 +141,23 @@ public:
     QWidget *tab_7;
     QPushButton *pushButton_SEM1215_Current;
     QPushButton *pushButton_SEM1215_Ver;
+    QPushButton *pushButton_SEM1217_Read;
     QWidget *tab_8;
     QPushButton *pushButton_AW86006_init;
     QPushButton *pushButton_AW86006_FW;
     QPushButton *pushButton_AW86006_HallCal;
     QPushButton *pushButton_AW86006_Square;
-    QPushButton *pushButton_AW86006_Cross_Talk;
+    QPushButton *pushButton_AW86006_Read;
+    QPushButton *pushButton_AW86006_Slave_Change;
+    QPushButton *pushButton_AW86006_Sine;
+    QPushButton *pushButton_AW86006_Vsync;
     QWidget *tab_2;
     QGroupBox *groupBox_4;
-    QTextEdit *AF_Times;
-    QPushButton *pushButton_AF_Aging_Stop;
     QPushButton *pushButton_AF_Aging_OnSemi;
-    QPushButton *pushButton_AF_Aging;
     QPushButton *pushButton_read_AF_SNA;
     QPushButton *pushButton_read_OIS;
     QPushButton *pushButton_AF_SNA_Lin;
+    QPushButton *pushButton_Slave_Scan;
     QPushButton *pushButton_script;
     QGroupBox *groupBox_5;
     QLabel *label_15;
@@ -160,9 +165,18 @@ public:
     QRadioButton *radioButton_FWD;
     QRadioButton *radioButton_BWD;
     QLabel *label_16;
+    QLabel *label_17;
+    QRadioButton *radioButton_Axis_Y;
+    QRadioButton *radioButton_Axis_X;
+    QTextEdit *AF_Times;
+    QTextEdit *Delay;
+    QLabel *label_19;
+    QPushButton *pushButton_AF_Aging_Stop;
+    QPushButton *pushButton_AF_Aging;
+    QButtonGroup *buttonGroup_3;
+    QButtonGroup *buttonGroup_4;
     QButtonGroup *buttonGroup_2;
     QButtonGroup *buttonGroup;
-    QButtonGroup *buttonGroup_3;
 
     void setupUi(QWidget *EEPROM)
     {
@@ -498,6 +512,18 @@ public:
         pushButton_BU24532_Sine->setObjectName(QStringLiteral("pushButton_BU24532_Sine"));
         pushButton_BU24532_Sine->setGeometry(QRect(105, 55, 100, 30));
         pushButton_BU24532_Sine->setCheckable(false);
+        pushButton_BU24721_DC = new QPushButton(tab_3);
+        pushButton_BU24721_DC->setObjectName(QStringLiteral("pushButton_BU24721_DC"));
+        pushButton_BU24721_DC->setGeometry(QRect(4, 145, 100, 30));
+        pushButton_BU24721_DC->setCheckable(false);
+        pushButton_BU24721_Drive = new QPushButton(tab_3);
+        pushButton_BU24721_Drive->setObjectName(QStringLiteral("pushButton_BU24721_Drive"));
+        pushButton_BU24721_Drive->setGeometry(QRect(6, 83, 100, 30));
+        pushButton_BU24721_Drive->setCheckable(false);
+        pushButton_BU24532_Life = new QPushButton(tab_3);
+        pushButton_BU24532_Life->setObjectName(QStringLiteral("pushButton_BU24532_Life"));
+        pushButton_BU24532_Life->setGeometry(QRect(105, 145, 100, 30));
+        pushButton_BU24532_Life->setCheckable(false);
         tabWidget->addTab(tab_3, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
@@ -550,6 +576,10 @@ public:
         pushButton_SEM1215_Ver->setObjectName(QStringLiteral("pushButton_SEM1215_Ver"));
         pushButton_SEM1215_Ver->setGeometry(QRect(0, 0, 100, 30));
         pushButton_SEM1215_Ver->setCheckable(false);
+        pushButton_SEM1217_Read = new QPushButton(tab_7);
+        pushButton_SEM1217_Read->setObjectName(QStringLiteral("pushButton_SEM1217_Read"));
+        pushButton_SEM1217_Read->setGeometry(QRect(100, 0, 100, 30));
+        pushButton_SEM1217_Read->setCheckable(false);
         tabWidget->addTab(tab_7, QString());
         tab_8 = new QWidget();
         tab_8->setObjectName(QStringLiteral("tab_8"));
@@ -567,33 +597,34 @@ public:
         pushButton_AW86006_HallCal->setCheckable(false);
         pushButton_AW86006_Square = new QPushButton(tab_8);
         pushButton_AW86006_Square->setObjectName(QStringLiteral("pushButton_AW86006_Square"));
-        pushButton_AW86006_Square->setGeometry(QRect(0, 90, 100, 30));
+        pushButton_AW86006_Square->setGeometry(QRect(100, 0, 100, 30));
         pushButton_AW86006_Square->setCheckable(false);
-        pushButton_AW86006_Cross_Talk = new QPushButton(tab_8);
-        pushButton_AW86006_Cross_Talk->setObjectName(QStringLiteral("pushButton_AW86006_Cross_Talk"));
-        pushButton_AW86006_Cross_Talk->setGeometry(QRect(0, 120, 100, 30));
-        pushButton_AW86006_Cross_Talk->setCheckable(false);
+        pushButton_AW86006_Read = new QPushButton(tab_8);
+        pushButton_AW86006_Read->setObjectName(QStringLiteral("pushButton_AW86006_Read"));
+        pushButton_AW86006_Read->setGeometry(QRect(0, 120, 100, 30));
+        pushButton_AW86006_Read->setCheckable(false);
+        pushButton_AW86006_Slave_Change = new QPushButton(tab_8);
+        pushButton_AW86006_Slave_Change->setObjectName(QStringLiteral("pushButton_AW86006_Slave_Change"));
+        pushButton_AW86006_Slave_Change->setGeometry(QRect(0, 150, 100, 30));
+        pushButton_AW86006_Slave_Change->setCheckable(false);
+        pushButton_AW86006_Sine = new QPushButton(tab_8);
+        pushButton_AW86006_Sine->setObjectName(QStringLiteral("pushButton_AW86006_Sine"));
+        pushButton_AW86006_Sine->setGeometry(QRect(100, 30, 100, 30));
+        pushButton_AW86006_Sine->setCheckable(false);
+        pushButton_AW86006_Vsync = new QPushButton(tab_8);
+        pushButton_AW86006_Vsync->setObjectName(QStringLiteral("pushButton_AW86006_Vsync"));
+        pushButton_AW86006_Vsync->setGeometry(QRect(100, 150, 100, 30));
+        pushButton_AW86006_Vsync->setCheckable(false);
         tabWidget->addTab(tab_8, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
         groupBox_4 = new QGroupBox(tab_2);
         groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
-        groupBox_4->setGeometry(QRect(270, 0, 141, 141));
-        AF_Times = new QTextEdit(groupBox_4);
-        AF_Times->setObjectName(QStringLiteral("AF_Times"));
-        AF_Times->setGeometry(QRect(10, 20, 61, 30));
-        pushButton_AF_Aging_Stop = new QPushButton(groupBox_4);
-        pushButton_AF_Aging_Stop->setObjectName(QStringLiteral("pushButton_AF_Aging_Stop"));
-        pushButton_AF_Aging_Stop->setGeometry(QRect(80, 20, 51, 30));
-        pushButton_AF_Aging_Stop->setCheckable(false);
+        groupBox_4->setGeometry(QRect(270, 0, 141, 41));
         pushButton_AF_Aging_OnSemi = new QPushButton(groupBox_4);
         pushButton_AF_Aging_OnSemi->setObjectName(QStringLiteral("pushButton_AF_Aging_OnSemi"));
-        pushButton_AF_Aging_OnSemi->setGeometry(QRect(10, 100, 121, 30));
+        pushButton_AF_Aging_OnSemi->setGeometry(QRect(10, 10, 121, 30));
         pushButton_AF_Aging_OnSemi->setCheckable(false);
-        pushButton_AF_Aging = new QPushButton(groupBox_4);
-        pushButton_AF_Aging->setObjectName(QStringLiteral("pushButton_AF_Aging"));
-        pushButton_AF_Aging->setGeometry(QRect(10, 60, 121, 30));
-        pushButton_AF_Aging->setCheckable(false);
         pushButton_read_AF_SNA = new QPushButton(tab_2);
         pushButton_read_AF_SNA->setObjectName(QStringLiteral("pushButton_read_AF_SNA"));
         pushButton_read_AF_SNA->setGeometry(QRect(0, 0, 100, 30));
@@ -606,6 +637,10 @@ public:
         pushButton_AF_SNA_Lin->setObjectName(QStringLiteral("pushButton_AF_SNA_Lin"));
         pushButton_AF_SNA_Lin->setGeometry(QRect(0, 30, 100, 30));
         pushButton_AF_SNA_Lin->setCheckable(false);
+        pushButton_Slave_Scan = new QPushButton(tab_2);
+        pushButton_Slave_Scan->setObjectName(QStringLiteral("pushButton_Slave_Scan"));
+        pushButton_Slave_Scan->setGeometry(QRect(0, 170, 100, 30));
+        pushButton_Slave_Scan->setCheckable(false);
         tabWidget->addTab(tab_2, QString());
         pushButton_script = new QPushButton(EEPROM);
         pushButton_script->setObjectName(QStringLiteral("pushButton_script"));
@@ -634,6 +669,37 @@ public:
         label_16 = new QLabel(groupBox_5);
         label_16->setObjectName(QStringLiteral("label_16"));
         label_16->setGeometry(QRect(60, 10, 61, 16));
+        label_17 = new QLabel(groupBox_5);
+        label_17->setObjectName(QStringLiteral("label_17"));
+        label_17->setGeometry(QRect(120, 10, 31, 16));
+        radioButton_Axis_Y = new QRadioButton(groupBox_5);
+        buttonGroup_4 = new QButtonGroup(EEPROM);
+        buttonGroup_4->setObjectName(QStringLiteral("buttonGroup_4"));
+        buttonGroup_4->addButton(radioButton_Axis_Y);
+        radioButton_Axis_Y->setObjectName(QStringLiteral("radioButton_Axis_Y"));
+        radioButton_Axis_Y->setGeometry(QRect(120, 50, 31, 16));
+        radioButton_Axis_X = new QRadioButton(groupBox_5);
+        buttonGroup_4->addButton(radioButton_Axis_X);
+        radioButton_Axis_X->setObjectName(QStringLiteral("radioButton_Axis_X"));
+        radioButton_Axis_X->setGeometry(QRect(120, 30, 31, 16));
+        radioButton_Axis_X->setChecked(true);
+        AF_Times = new QTextEdit(groupBox_5);
+        AF_Times->setObjectName(QStringLiteral("AF_Times"));
+        AF_Times->setGeometry(QRect(350, 49, 50, 25));
+        Delay = new QTextEdit(groupBox_5);
+        Delay->setObjectName(QStringLiteral("Delay"));
+        Delay->setGeometry(QRect(356, 20, 45, 25));
+        label_19 = new QLabel(groupBox_5);
+        label_19->setObjectName(QStringLiteral("label_19"));
+        label_19->setGeometry(QRect(360, 5, 41, 16));
+        pushButton_AF_Aging_Stop = new QPushButton(groupBox_5);
+        pushButton_AF_Aging_Stop->setObjectName(QStringLiteral("pushButton_AF_Aging_Stop"));
+        pushButton_AF_Aging_Stop->setGeometry(QRect(305, 45, 41, 30));
+        pushButton_AF_Aging_Stop->setCheckable(false);
+        pushButton_AF_Aging = new QPushButton(groupBox_5);
+        pushButton_AF_Aging->setObjectName(QStringLiteral("pushButton_AF_Aging"));
+        pushButton_AF_Aging->setGeometry(QRect(305, 15, 41, 30));
+        pushButton_AF_Aging->setCheckable(false);
         groupBox_5->raise();
         log->raise();
         groupBox_3->raise();
@@ -696,7 +762,7 @@ public:
 
         retranslateUi(EEPROM);
 
-        tabWidget->setCurrentIndex(6);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(EEPROM);
@@ -704,7 +770,7 @@ public:
 
     void retranslateUi(QWidget *EEPROM)
     {
-        EEPROM->setWindowTitle(QApplication::translate("EEPROM", "EnvyLogic Controller_20230214", Q_NULLPTR));
+        EEPROM->setWindowTitle(QApplication::translate("EEPROM", "EnvyLogic Controller_20230419", Q_NULLPTR));
         pushButton_read->setText(QApplication::translate("EEPROM", "Read", Q_NULLPTR));
         label->setText(QApplication::translate("EEPROM", "Check Result", Q_NULLPTR));
         pushButton_write->setText(QApplication::translate("EEPROM", "Write", Q_NULLPTR));
@@ -849,6 +915,9 @@ public:
         pushButton_BU24532_Iris_off->setText(QApplication::translate("EEPROM", "IRIS Small", Q_NULLPTR));
         pushButton_BU24532_Test->setText(QApplication::translate("EEPROM", "BU24532 Test", Q_NULLPTR));
         pushButton_BU24532_Sine->setText(QApplication::translate("EEPROM", "BU24532 Sine", Q_NULLPTR));
+        pushButton_BU24721_DC->setText(QApplication::translate("EEPROM", "BU24721 DC_Sen", Q_NULLPTR));
+        pushButton_BU24721_Drive->setText(QApplication::translate("EEPROM", "BU24721 Drive", Q_NULLPTR));
+        pushButton_BU24532_Life->setText(QApplication::translate("EEPROM", "BU24532 Life", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("EEPROM", "ROHM", Q_NULLPTR));
         pushButton_DW2->setText(QApplication::translate("EEPROM", "DW9781 Cls Sin", Q_NULLPTR));
         pushButton_DW1->setText(QApplication::translate("EEPROM", "DW9781 Open Sin", Q_NULLPTR));
@@ -863,25 +932,23 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("EEPROM", "AK", Q_NULLPTR));
         pushButton_SEM1215_Current->setText(QApplication::translate("EEPROM", "SEM1215_Current", Q_NULLPTR));
         pushButton_SEM1215_Ver->setText(QApplication::translate("EEPROM", "SEM1215_Ver", Q_NULLPTR));
+        pushButton_SEM1217_Read->setText(QApplication::translate("EEPROM", "SEM1217_Read", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("EEPROM", "SEM", Q_NULLPTR));
         pushButton_AW86006_init->setText(QApplication::translate("EEPROM", "AW86006 Init", Q_NULLPTR));
         pushButton_AW86006_FW->setText(QApplication::translate("EEPROM", "AW86006 FW Down", Q_NULLPTR));
         pushButton_AW86006_HallCal->setText(QApplication::translate("EEPROM", "AW86006 HallCal", Q_NULLPTR));
         pushButton_AW86006_Square->setText(QApplication::translate("EEPROM", "AW86006 Square", Q_NULLPTR));
-        pushButton_AW86006_Cross_Talk->setText(QApplication::translate("EEPROM", "AW86006 CrsTlk", Q_NULLPTR));
+        pushButton_AW86006_Read->setText(QApplication::translate("EEPROM", "AW86006 Read", Q_NULLPTR));
+        pushButton_AW86006_Slave_Change->setText(QApplication::translate("EEPROM", "AW86006 Slave", Q_NULLPTR));
+        pushButton_AW86006_Sine->setText(QApplication::translate("EEPROM", "AW86006 Sine", Q_NULLPTR));
+        pushButton_AW86006_Vsync->setText(QApplication::translate("EEPROM", "AW86006 Vsync", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_8), QApplication::translate("EEPROM", "AW", Q_NULLPTR));
         groupBox_4->setTitle(QApplication::translate("EEPROM", "Aging", Q_NULLPTR));
-        AF_Times->setHtml(QApplication::translate("EEPROM", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">300000</p></body></html>", Q_NULLPTR));
-        pushButton_AF_Aging_Stop->setText(QApplication::translate("EEPROM", "Stop", Q_NULLPTR));
         pushButton_AF_Aging_OnSemi->setText(QApplication::translate("EEPROM", "OnSemi AF_Aging", Q_NULLPTR));
-        pushButton_AF_Aging->setText(QApplication::translate("EEPROM", "SNA AF_Aging", Q_NULLPTR));
         pushButton_read_AF_SNA->setText(QApplication::translate("EEPROM", "SNA AF_Read", Q_NULLPTR));
         pushButton_read_OIS->setText(QApplication::translate("EEPROM", " Rumba OIS_Drv ", Q_NULLPTR));
         pushButton_AF_SNA_Lin->setText(QApplication::translate("EEPROM", "SNA AF Lin", Q_NULLPTR));
+        pushButton_Slave_Scan->setText(QApplication::translate("EEPROM", "Slave_Scan", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("EEPROM", "ETC", Q_NULLPTR));
         pushButton_script->setText(QApplication::translate("EEPROM", "Script", Q_NULLPTR));
         groupBox_5->setTitle(QApplication::translate("EEPROM", "setting", Q_NULLPTR));
@@ -894,6 +961,22 @@ public:
         radioButton_FWD->setText(QApplication::translate("EEPROM", "FWD", Q_NULLPTR));
         radioButton_BWD->setText(QApplication::translate("EEPROM", "BWD", Q_NULLPTR));
         label_16->setText(QApplication::translate("EEPROM", "Direction", Q_NULLPTR));
+        label_17->setText(QApplication::translate("EEPROM", "Axis", Q_NULLPTR));
+        radioButton_Axis_Y->setText(QApplication::translate("EEPROM", "Y", Q_NULLPTR));
+        radioButton_Axis_X->setText(QApplication::translate("EEPROM", "X", Q_NULLPTR));
+        AF_Times->setHtml(QApplication::translate("EEPROM", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">300000</p></body></html>", Q_NULLPTR));
+        Delay->setHtml(QApplication::translate("EEPROM", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">100</p></body></html>", Q_NULLPTR));
+        label_19->setText(QApplication::translate("EEPROM", "Delay", Q_NULLPTR));
+        pushButton_AF_Aging_Stop->setText(QApplication::translate("EEPROM", "Stop", Q_NULLPTR));
+        pushButton_AF_Aging->setText(QApplication::translate("EEPROM", "Life", Q_NULLPTR));
     } // retranslateUi
 
 };

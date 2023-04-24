@@ -27,7 +27,7 @@ unsigned char AF_DecData[32768];
 char chk[2];
 unsigned char slave, addr_H, addr_L;
 unsigned char data_LSB[4];
-int yy = 0x200000,OIS_range_ratio=80;
+int yy = 0x200000,OIS_range_ratio=80, m_Aging_Times=300000;
 int CH = 0;
 
 int Value_init = -1;
@@ -49,6 +49,7 @@ int Value_I2cWrite = -1;
 int Value_I2cRead = -1;
 int EEP_Size = 16384;
 const int PageSize = 0x10;
+float m_Delay = 0;
 
 MyThread *subThread = new MyThread;
 QString uiContent;
@@ -61,9 +62,6 @@ HINSTANCE hDllInst = LoadLibrary(TEXT("dclib.dll"));
 ofstream fout(".\\logData.txt");
 ofstream script_log;
 
-//int awI2CRead(BYTE DevId, BYTE AddrSize, BYTE* pAddr, BYTE RdSize, BYTE* pRdBuf);
-//int awI2CWrite(BYTE DevId, BYTE WrSize, BYTE* WrData);
-//int awOutputLog(const char* str);
 
 void Delay(DWORD delayTime)
 {
@@ -114,6 +112,18 @@ unsigned char getHexValue(char x) {
 	else
 		s = x - '0';
 	return s;
+}
+
+int my_DG_I2C_Read2(UCHAR Slave, USHORT addr, int length, UCHAR *data) {
+
+	int ack = 0;
+	UCHAR buf[5] = { Slave ,addr >> 8,addr & 0xFF ,0,0 };
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, buf, 3);
+	buf[0] += 1;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, buf, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, data, length);
+
+	return ack;
 }
 
 void log_out(int x) {
@@ -535,96 +545,49 @@ void AFDRVCheck::on_checkBox_31_clicked() {
 DWORD WINAPI myThread(LPVOID argv) {
 
 	char buff[10] = { 0 };
-//	ZeroMemory(buff, sizeof(buff));
 	memcpy(buff, argv, 10);
 
-	for (int i = atoi(buff); i > 0; i--) {
+	script_log.open(".\\test_log.txt");
+	int ack = 0;
+	unsigned char Read_Data[5] = { 0 }, AF_slave_Read = 0x19;
+	unsigned char OIS_Data[5] = { 0x7C,0x60,0x20,0x01,0 }, OIS_slave_Read = 0x7D;
+	unsigned char OIS_Data1[5] = { 0x7C,0x61,0xDC,0x03,0 };
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
+	IIC_Delayus(0.01f);
+	unsigned char OIS_Data3[5] = { 0x7C,0x60,0x60,0,0 };
+	int start = 1020, end = -1024;
+	
+	start *= OIS_range_ratio / 100.0;
+	end *= OIS_range_ratio / 100.0;
+	for (int x = 0; x < m_Aging_Times; x++) {
 
 		if (Start == false) {
 			break;
-			return NULL;
 		}
-		if (slave == 0x18) {
-
-			Value_I2cStart = DC_I2cStart(0, 0);
-			Value_I2cWrite = DC_I2cWrite(0, 0, slave);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x82);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x00);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x00);
-			DC_I2cStop(0, 0);
-			Sleep(20);
-
-			Value_I2cStart = DC_I2cStart(0, 0);
-			Value_I2cWrite = DC_I2cWrite(0, 0, slave);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x82);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x07);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0xFF);
-			DC_I2cStop(0, 0);
-			Sleep(20);
-
-			Value_I2cStart = DC_I2cStart(0, 0);
-			Value_I2cWrite = DC_I2cWrite(0, 0, slave);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x82);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x0F);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0xFF);
-			DC_I2cStop(0, 0);
-			Sleep(20);
-
-			Value_I2cStart = DC_I2cStart(0, 0);
-			Value_I2cWrite = DC_I2cWrite(0, 0, slave);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x82);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x07);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0xFF);
-			DC_I2cStop(0, 0);
-			Sleep(20);
-		}
-
-		if (slave == 0xE4) {
-
-			Value_I2cStart = DC_I2cStart(0, 0);
-			Value_I2cWrite = DC_I2cWrite(0, 0, slave);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x84);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x00);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x00);
-			DC_I2cStop(0, 0);
-			Sleep(20);
-
-			Value_I2cStart = DC_I2cStart(0, 0);
-			Value_I2cWrite = DC_I2cWrite(0, 0, slave);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x84);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x01);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0xFF);
-			DC_I2cStop(0, 0);
-			Sleep(20);
-
-			Value_I2cStart = DC_I2cStart(0, 0);
-			Value_I2cWrite = DC_I2cWrite(0, 0, slave);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x84);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x03);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0xFF);
-			DC_I2cStop(0, 0);
-			Sleep(20);
-
-			Value_I2cStart = DC_I2cStart(0, 0);
-			Value_I2cWrite = DC_I2cWrite(0, 0, slave);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x84);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0x01);
-			Value_I2cWrite = DC_I2cWrite(0, 0, 0xFF);
-			DC_I2cStop(0, 0);
-			Sleep(20);
-
-		}
-		//if(i%10==0){
-
-	//		ui_Out->AF_Times->setText(to_string(i).c_str());
-	//		uiContent = QString::number(i);
-	//		subThread->strSet(uiContent);
-	//		subThread->setNum(i);
-		 	subThread->inputSet(QString::number(i));
-	//		subThread->start();
-		//}
+		int pos = start;
+		if (x % 2 == 1)pos = end;
+		OIS_Data3[1] = 0x61;
+		OIS_Data3[2] = 0xDE;  //X:0xDE   Y:0xE0
+		OIS_Data3[3] = (pos >> 8) & 0xFF;
+		OIS_Data3[4] = pos & 0xFF;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 5);
+		OIS_Data3[2] = 0xE0;  //X:0xDE   Y:0xE0
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 5);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data1, 4);
+		IIC_Delayus(m_Delay);
+		int cnt = 0;
+		OIS_Data3[2] = 0x9B;
+		OIS_Data3[3] = 3;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
+		my_DG_I2C_Read2(0x7C, 0x619C, 2, Read_Data);
+		script_log << x << "	" << Read_Data[0] * 256 + Read_Data[1] << "	";
+		OIS_Data3[3] = 5;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
+		my_DG_I2C_Read2(0x7C, 0x619C, 2, Read_Data);
+		script_log << Read_Data[0] * 256 + Read_Data[1] << endl;
 	}
-	//	ui_Out->input->setText("AF Aging Test finished. \n");
+
+	script_log.close();
 	return NULL;
 }
 
@@ -1014,6 +977,8 @@ int AFDRVCheck::my_DC_I2cWrite(unsigned char slave, unsigned char addr_H, unsign
 
 	return ack;
 }
+
+
 
 
 void AFDRVCheck::on_pushButton_read_all_clicked()
@@ -1445,6 +1410,7 @@ void AFDRVCheck::on_pushButton_read_AF_OnSemi_clicked() {
 void AFDRVCheck::on_pushButton_AF_Aging_Stop_clicked() {
 
 	Start = false;
+	ui->input->insertPlainText("Aging test Stop\n");
 
 }
 
@@ -1452,23 +1418,10 @@ void AFDRVCheck::on_pushButton_AF_Aging_Stop_clicked() {
 void AFDRVCheck::on_pushButton_AF_Aging_clicked() {
 
 	Start = true;
-	GPIO_Data = 262143;
-	Value_GPIOwrite = DC_GpioWriteOut(0, GPIO_Data);
-	Sleep(50);
-	on_pushButton_GPIO_read_clicked();
+	m_Delay = ui->Delay->document()->toPlainText().toInt() / 1000.0;
+	OIS_range_ratio = ui->OIS_range->document()->toPlainText().toInt();
+	m_Aging_Times = ui->AF_Times->document()->toPlainText().toInt();
 
-	slave = 0x18;
-
-	Value_I2cStart = DC_I2cStart(0, 0);
-	Value_I2cWrite = DC_I2cWrite(0, 0, slave);
-	Value_I2cWrite = DC_I2cWrite(0, 0, 0x81);
-	Value_I2cWrite = DC_I2cWrite(0, 0, 0x01);
-	DC_I2cStop(0, 0);
-	Sleep(10);
-
-	s = ui->AF_Times->document()->toPlainText().toLocal8Bit();
-	//	connect(subThread, SIGNAL(changeText(QString)), this, SLOT(labelSetText(QString)), Qt::QueuedConnection);
-	//	connect(subThread, SIGNAL(changeNum(int)), this, SLOT(displayNum(int)));
 	connect(subThread, SIGNAL(changeText(QString)), this, SLOT(displayText(QString)));
 
 	HANDLE myHandle = CreateThread(NULL, 0, myThread, (LPVOID)s.c_str(), 0, NULL);
@@ -2000,17 +1953,35 @@ void AFDRVCheck::on_pushButton_DW1_clicked() {
 }
 
 
+int AFDRVCheck::bu24721_Status_check() {
+
+	int tmo = 0,ack=0;
+	unsigned char DW_Data[5] = { 0x7C,0xF0,0x20,1,0 }, Read_slave = 0x7D;
+
+	while (DecData[0] != 1) {
+		IIC_Delay(20);
+		DW_Data[2] = 0x24;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 3);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
+		ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 1);
+		tmo++;
+		if (tmo > 500)return 1;
+	}
+	return 0;
+}
+
 void AFDRVCheck::on_pushButton_BU24721_clicked() {
 
 	script_log.open(".\\test_log.txt");
-	int ack = 0, e = 0, N = 5;
+	int ack = 0, e = 0, N = 2, mStatus=0;
 	unsigned char DW_Data[5] = { 0x7C,0xF0,0x20,1,0 }, Read_slave = 0x7D;
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 4);
-	IIC_Delay(20);
+	mStatus = bu24721_Status_check();
 
 	int rng = ui->OIS_range->document()->toPlainText().toInt();
 	int offsetX = ui->decenter_BU24721X->document()->toPlainText().toInt();
 	if (offsetX < 0)offsetX = 65536 + offsetX;
+
 
 	DW_Data[1] = 0xF1;
 	DW_Data[2] = 0x78;
@@ -2038,7 +2009,7 @@ void AFDRVCheck::on_pushButton_BU24721_clicked() {
 	DW_Data[2] = 0x21;
 	DW_Data[3] = 3;
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 4);
-	IIC_Delay(10);
+	IIC_Delay(20);
 
 	DW_Data[2] = 0x20;
 	DW_Data[3] = 2;
@@ -2061,7 +2032,7 @@ void AFDRVCheck::on_pushButton_BU24721_clicked() {
 	DW_Data[2] = 0x38;
 	DW_Data[3] = 2;
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 4);
-	IIC_Delay(20);
+
 	DW_Data[2] = 0x30;
 	DW_Data[3] = 0x03;
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 4);
@@ -2073,6 +2044,16 @@ void AFDRVCheck::on_pushButton_BU24721_clicked() {
 		for (int a = 0; a < 200; a++) {
 			ack = 0;
 			unsigned char DW_Data3[4] = { 0x7C,0xF0,0x60,0 };
+			DW_Data3[2] = 0x24;
+			DecData[0] = 0; int cnt = 0;
+			while (DecData[0] == 0&& cnt<20) {
+				ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
+				ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+				IIC_Delayus(0.001);
+				cnt++;
+			}
+
+			DW_Data3[2] = 0x62;
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 4);
 			DW_Data3[2] = 0x62;
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 3);
@@ -2095,6 +2076,7 @@ void AFDRVCheck::on_pushButton_BU24721_clicked() {
 			if (hall > 0x7FFF)
 				hall = hall - 65536;
 			hall_XY[k++][1] = hall;
+
 		}
 	}
 
@@ -2110,6 +2092,252 @@ void AFDRVCheck::on_pushButton_BU24721_clicked() {
 	}
 
 	ui->log->insertPlainText("BU24721 Sine Wave run finished \n");
+	script_log.close();
+
+}
+
+
+void AFDRVCheck::on_pushButton_BU24721_DC_clicked() {
+
+	script_log.open(".\\test_log.txt");
+	int ack = 0, axis = 0;
+	unsigned char DW_Data[5] = { 0x7C,0xF0,0x20,1,0 }, Read_slave = 0x7D;
+	if (ui->radioButton_Axis_Y->isChecked())axis = 1;
+
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 4);
+	IIC_Delayus(0.01f);
+	DW_Data[3] = 4;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 4);
+	IIC_Delayus(0.1f);
+	DW_Data[2] = 0x8D;
+	if(axis==0)	DW_Data[3] = 1;
+	else DW_Data[3] = 3;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 4);
+
+	DW_Data[2] = 0x70;
+	DW_Data[3] = 0;
+	DW_Data[4] = 0;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 4);
+	DW_Data[2] = 0x72;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 4);
+
+	IIC_Delayus(0.1f);
+
+	int hall_XY[10000][2] = { 0 }, k = 0;
+	
+	for (short a = -1000; a < 1000; a+=16) {
+		ack = 0;
+		DW_Data[1] = 0xF0;
+		if(axis==0)		DW_Data[2] = 0x70;
+		else DW_Data[2] = 0x72;
+		DW_Data[3] = a>>8;
+		DW_Data[4] = a&0xFF;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 5 );
+		IIC_Delayus(0.01f);
+		if(a==-1023)IIC_Delayus(0.5f);
+
+		unsigned char DW_Data3[4] = { 0x7C,0xF0,0x60,0 };
+		if (axis == 1)DW_Data3[3] = 1;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 4);
+		DW_Data3[2] = 0x62;
+		IIC_Delayus(0.01f);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 3);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
+		ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+		int hall = DecData[0] * 256 + DecData[1];
+		if (hall > 0x7FFF)
+			hall = hall - 65536;
+		hall_XY[k++][0] = hall;
+	}
+	int DC_cnt = k;
+	k--;
+	for (short a = 1000; a > -1000; a -= 16) {
+		ack = 0;
+		DW_Data[1] = 0xF0;
+		if (axis == 0)		DW_Data[2] = 0x70;
+		else DW_Data[2] = 0x72;
+		DW_Data[3] = a >> 8;
+		DW_Data[4] = a & 0xFF;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 5);
+		IIC_Delayus(0.01f);
+		if (a == -1023)IIC_Delayus(0.5f);
+
+		unsigned char DW_Data3[4] = { 0x7C,0xF0,0x60,0 };
+		if (axis == 1)DW_Data3[3] = 1;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 4);
+		DW_Data3[2] = 0x62;
+		IIC_Delayus(0.01f);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 3);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
+		ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+		int hall = DecData[0] * 256 + DecData[1];
+		if (hall > 0x7FFF)
+			hall = hall - 65536;
+		hall_XY[k--][1] = hall;
+	}
+
+	DW_Data[2] = 0x70;
+	DW_Data[3] = 0;
+	DW_Data[4] = 0;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 4);
+	DW_Data[2] = 0x72;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 4);
+
+	IIC_Delayus(0.1f);
+
+	script_log << "DC_Up	DC_Down:" << endl;
+	for (int i = 0; i < DC_cnt; i++) {
+		script_log << hall_XY[i][0] << "	" << hall_XY[i][1] << endl;
+	}
+
+	ui->log->insertPlainText("BU24721 DC Test finished \n");
+	script_log.close();
+
+}
+
+
+void AFDRVCheck::on_pushButton_BU24721_Drive_clicked() {
+
+	script_log.open(".\\test_log.txt");
+	int ack = 0, e = 0, N = 100000;
+	unsigned char Iris_Data[5] = { 0x18,0xF0,0x20,1,0 }, AF_slave_Read = 0x19;
+	unsigned char OIS_Data[5] = { 0x7C,0xF0,0x20,0x01,0 }, OIS_slave_Read = 0x7D;
+	unsigned char OIS_Data1[5] = { 0x7C,0x8D,0xC0,0x03,0 };
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
+	IIC_Delayus(0.1f);
+	float d = 0;
+	script_log << "X drive" << endl;
+	unsigned char OIS_Data3[5] = { 0x7C,0x60,0x60,0,0 };
+	int hall[4096][3];
+
+	OIS_Data3[1] = 0xF1;
+	OIS_Data3[2] = 0x7C;  //X:0x70   Y:0x72
+	OIS_Data3[3] = 1;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
+
+	OIS_Data3[1] = 0xF0;
+	OIS_Data3[2] = 0x20;  //X:0x70   Y:0x72
+	OIS_Data3[3] = 7;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
+
+	OIS_Data3[1] = 0xF1;
+	OIS_Data3[2] = 0x72;  //X:0x70   Y:0x72
+	OIS_Data3[3] = 0;
+	OIS_Data3[4] = 0;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 5);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data1, 4);
+	IIC_Delayus(0.1);
+
+	int start = 1020, end = -1024, step = -4;
+	if (ui->radioButton_FWD->isChecked()) {
+		start = -1020, end = 1024, step = 4;
+	}
+
+	for (int x = start; x != end; x += step) {
+		ack = 0;
+		OIS_Data3[1] = 0xF1;
+		OIS_Data3[2] = 0x70;  //X:0xDE   Y:0xE0
+		int pos = x;
+		OIS_Data3[3] = pos >> 8;
+		OIS_Data3[4] = pos & 0xFF;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 5);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data1, 4);
+		IIC_Delayus(0.005);
+
+		if (x == start)	IIC_Delayus(0.1);
+		OIS_Data3[1] = 0xF0;
+		OIS_Data3[2] = 0x60;
+		OIS_Data3[3] = 0x00;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
+		IIC_Delayus(d);
+		OIS_Data3[2] = 0x62;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
+		IIC_Delayus(d);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+		ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+		int hall = DecData[0] * 256 + DecData[1];
+		if (hall > 0x7FFF)
+			hall = hall - 65536;
+		script_log << x << "	"<< 0<<"	";
+		script_log << hall << "	";
+
+		OIS_Data3[2] = 0x60;
+		OIS_Data3[3] = 0x01;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
+		IIC_Delayus(d);
+		OIS_Data3[2] = 0x62;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
+		IIC_Delayus(d);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+		ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+		hall = DecData[0] * 256 + DecData[1];
+		if (hall > 0x7FFF)
+			hall = hall - 65536;
+		script_log << hall << "	"<<endl;
+
+	}
+
+	OIS_Data3[1] = 0xF1;
+	OIS_Data3[2] = 0x70;  //X:0xDE   Y:0xE0
+	OIS_Data3[3] = 0;
+	OIS_Data3[4] = 0;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 5);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data1, 4);
+	IIC_Delayus(0.1);
+
+	////Y drive
+	script_log << endl << "Y drive" << endl;
+	e = 0;
+	for (int x = start; x != end; x += step) {
+		ack = 0;
+		OIS_Data3[1] = 0xF1;
+		OIS_Data3[2] = 0x72;
+		int pos = x;
+		OIS_Data3[3] = pos >> 8;
+		OIS_Data3[4] = pos & 0xFF;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 5);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data1, 4);
+		IIC_Delayus(0.005);
+
+		if (x == start)	IIC_Delayus(0.1);
+		OIS_Data3[1] = 0xF0;
+		OIS_Data3[2] = 0x60;
+		OIS_Data3[3] = 0x00;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
+		IIC_Delayus(d);
+		OIS_Data3[2] = 0x62;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
+		IIC_Delayus(d);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+		ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+		int hall = DecData[0] * 256 + DecData[1];
+		if (hall > 0x7FFF)
+			hall = hall - 65536;
+
+		script_log << 0 << "	" << x << "	";
+		script_log << hall << "	";
+
+		OIS_Data3[2] = 0x60;
+		OIS_Data3[3] = 0x01;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
+		IIC_Delayus(d);
+		OIS_Data3[2] = 0x62;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
+		IIC_Delayus(d);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+		ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+		hall = DecData[0] * 256 + DecData[1];
+		if (hall > 0x7FFF)
+			hall = hall - 65536;
+		script_log << hall << "	" << endl;
+
+	}
+
+	ui->log->insertPlainText("BU24721 driving Test finished \n");
 	script_log.close();
 
 }
@@ -2139,7 +2367,7 @@ void AFDRVCheck::on_pushButton_BU24721_Read_clicked() {
 			int hall = DecData[0] * 256 + DecData[1];
 			if (hall > 0x7FFF)
 				hall = hall - 65536;
-			script_log << hall << "	" ;
+			script_log <<x<<"	"<< hall << "	" ;
 
 			OIS_Data3[2] = 0x60;
 			OIS_Data3[3] = 0x01;
@@ -2437,6 +2665,61 @@ void AFDRVCheck::on_pushButton_BU24532_Drive_clicked() {
 	}
 	
 	ui->log->insertPlainText("BU24532 driving Test finished \n");
+	script_log.close();
+}
+
+
+void AFDRVCheck::on_pushButton_BU24532_Life_clicked() {
+
+	script_log.open(".\\test_log.txt");
+	int ack = 0;
+	unsigned char Read_Data[5] = { 0 }, AF_slave_Read = 0x19;
+	unsigned char OIS_Data[5] = { 0x7C,0x60,0x20,0x01,0 }, OIS_slave_Read = 0x7D;
+	unsigned char OIS_Data1[5] = { 0x7C,0x61,0xDC,0x03,0 };
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
+	IIC_Delayus(0.01f);
+	float dd = ui->Delay->document()->toPlainText().toInt()/1000.0;
+	unsigned char OIS_Data3[5] = { 0x7C,0x60,0x60,0,0 };
+	int start = 1020, end = -1024;
+	OIS_range_ratio = ui->OIS_range->document()->toPlainText().toInt();
+	int N = ui->AF_Times->document()->toPlainText().toInt();
+	start *= OIS_range_ratio / 100.0;
+	end *= OIS_range_ratio / 100.0;
+	for (int x = 0; x < N; x ++) {
+		ack = 0;
+		int pos = start;
+		if(x%2==1)pos = end;
+		OIS_Data3[1] = 0x61;
+		OIS_Data3[2] = 0xDE;  //X:0xDE   Y:0xE0
+		OIS_Data3[3] = (pos >> 8) & 0xFF;
+		OIS_Data3[4] = pos & 0xFF;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 5);
+		OIS_Data3[2] = 0xE0;  //X:0xDE   Y:0xE0
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 5);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data1, 4);
+		IIC_Delayus(dd);
+		int cnt = 0;
+		//do {
+		//	IIC_Delayus(5); cnt++;
+		//	my_DG_I2C_Read2(0x7C, 0x6024,1, Read_Data);	
+		//	if (Read_Data[0] == 1) {
+		//		IIC_Delayus(2);
+		//		break;
+		//	}
+		//} while (cnt<10);
+
+		OIS_Data3[2] = 0x9B; 
+		OIS_Data3[3] = 3;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
+		my_DG_I2C_Read2(0x7C, 0x619C, 2, Read_Data);
+		script_log << x<<"	"<<Read_Data[0] * 256 + Read_Data[1] << "	";
+		OIS_Data3[3] = 5;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
+		my_DG_I2C_Read2(0x7C, 0x619C, 2, Read_Data);
+		script_log << Read_Data[0] * 256 + Read_Data[1] << endl;
+	}
+
+	ui->log->insertPlainText("BU24532 OIS Life Test finished \n");
 	script_log.close();
 }
 
@@ -2898,6 +3181,69 @@ void AFDRVCheck::on_pushButton_SEM1215_Current_clicked() {
 }
 
 
+void AFDRVCheck::on_pushButton_SEM1217_Read_clicked() {
+
+	ofstream script_log("test_log.txt");
+	int ack = 0, hall = 0; string s;
+	unsigned char OIS_Data[5] = { 0xC2,0x04,0x28,0,0 }, OIS_slave_Read = 0xC3;
+
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+	hall = DecData[0] + DecData[1] * 256;
+	s = "X_Hall_Range:	" + to_string(hall) + "\n";
+	ui->log->insertPlainText(s.c_str());
+
+	OIS_Data[2] = 0x2A;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+	hall = DecData[0] + DecData[1] * 256;
+	s = "Y_Hall_Range:	" + to_string(hall) + "\n";
+	ui->log->insertPlainText(s.c_str());
+
+	OIS_Data[1] = 0xA1;
+	OIS_Data[2] = 0x22;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+	hall = DecData[0] + DecData[1] * 256;
+	s = "EPA X Hall Min:	" + to_string(hall) + "\n";
+	ui->log->insertPlainText(s.c_str());
+
+	OIS_Data[1] = 0xA1;
+	OIS_Data[2] = 0x24;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+	hall = DecData[0] + DecData[1] * 256;
+	s = "EPA X Hall Max:	" + to_string(hall) + "\n";
+	ui->log->insertPlainText(s.c_str());
+
+	OIS_Data[1] = 0xA1;
+	OIS_Data[2] = 0x42;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+	hall = DecData[0] + DecData[1] * 256;
+	s = "EPA Y Hall Min:	" + to_string(hall) + "\n";
+	ui->log->insertPlainText(s.c_str());
+
+	OIS_Data[1] = 0xA1;
+	OIS_Data[2] = 0x44;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+	hall = DecData[0] + DecData[1] * 256;
+	s = "EPA Y Hall Max:	" + to_string(hall) + "\n";
+	ui->log->insertPlainText(s.c_str());
+
+	s = "SEM1217_Read done\n";
+	ui->log->insertPlainText(s.c_str());
+
+}
+
+
 void AFDRVCheck::on_pushButton_CH1_clicked() {
 
 	I2C.m_hCapture = pHdg1;
@@ -3265,16 +3611,21 @@ void AFDRVCheck::on_pushButton_AW86006_init_clicked() {
 	pExtFuncList->pFunc_I2C_Write = awI2CWrite;
 	pExtFuncList->pFunc_OutputLog = awOutputLog;
 	AW86006.OIS_ExtFuncInit(pExtFuncList);
-
+	int nReturnCode = 0;
 	BYTE Ver = 0;
 	AW86006.GetDllVersion(&Ver);
-	string str = "DLL Version:	" + to_string(Ver) + "\n";
-	ui->log->insertPlainText(str.c_str());
-	//AW86006.GetVersionId(&Ver);
-	//str = "FW Version:	" + to_string(Ver) + "\n";
+	//string str = "DLL Version:	" + to_string(Ver) + "\n";
 	//ui->log->insertPlainText(str.c_str());
+	////AW86006.GetVersionId(&Ver);
+	////str = "FW Version:	" + to_string(Ver) + "\n";
+	////ui->log->insertPlainText(str.c_str());
 
-	ui->log->insertPlainText("AW86006 init done\n");
+	AwSet7bitI2CSlaveAddr(0x48>>1);
+	nReturnCode+=AwResetChip();
+	nReturnCode+=AwSetChipMode(2);
+	nReturnCode+= AwServeOn();
+
+	ui->log->insertPlainText("AW86006 init & Set Slave 0x48\n");
 
 }
 
@@ -3337,7 +3688,6 @@ void AFDRVCheck::on_pushButton_AW86006_HallCal_clicked() {
 
 	int ret = 0;
 	BYTE bias[2];
-	tCalData caldata;
 	string str;
 
 	ret = AwSetChipMode(2);
@@ -3356,9 +3706,9 @@ void AFDRVCheck::on_pushButton_AW86006_HallCal_clicked() {
 	ui->log->insertPlainText(str.c_str());
 
 	UINT16 uFre = 10;
-	BYTE uAmp = 8;
-	float fCaldBX = 10.5;
-	float fCaldBY = 10.5;
+	BYTE uAmp = 10;
+	float fCaldBX = 10.48;
+	float fCaldBY = 10.71;
 	float fRangeDown = 0.7f;
 	float fRangeUp = 2.0f;
 
@@ -3366,119 +3716,8 @@ void AFDRVCheck::on_pushButton_AW86006_HallCal_clicked() {
 	str = "AwLoopGainCal2(): " + to_string(ret) + "\n";
 	ui->log->insertPlainText(str.c_str());
 
-	ret = AwGetCalData(&caldata);
-	str = "AwGetCalData(): " + to_string(ret) + "\n";
-	ui->log->insertPlainText(str.c_str());
-
-	str = "byPgaGain_X: " + to_string(caldata.byPgaGain[0]) + "\n";
-	fout << str ;
-	str = "byPgaGain_Y: " + to_string(caldata.byPgaGain[1]) + "\n";
-	fout << str ;
-	str = "byHallBias_X: " + to_string(caldata.byHallBias[0]) + "\n";
-	fout << str ;
-	str = "byHallBias_Y: " + to_string(caldata.byHallBias[1]) + "\n";
-	fout << str ;
-	str = "u16HallOffset_X: " + to_string(caldata.u16HallOffset[0]) + "\n";
-	fout << str ;
-	str = "u16HallOffset_Y: " + to_string(caldata.u16HallOffset[1]) + "\n";
-	fout << str ;
-	str = "n16GyroOffset_X: " + to_string(caldata.n16GyroOffset[0]) + "\n";
-	fout << str ;
-	str = "n16GyroOffset_Y: " + to_string(caldata.n16GyroOffset[1]) + "\n";
-	fout << str ;
-	str = "fHallMaxX: " + to_string(caldata.fHallMaxX) + "\n";
-	fout << str ;
-	str = "fHallMinX: " + to_string(caldata.fHallMinX) + "\n";
-	fout << str ;
-	str = "fHallMaxY: " + to_string(caldata.fHallMaxY) + "\n";
-	fout << str ;
-	str = "fHallMinY: " + to_string(caldata.fHallMinY) + "\n";
-	fout << str ;
-	str = "fGyroGainX: " + to_string(caldata.fGyroGainX) + "\n";
-	fout << str ;
-	str = "fGyroGainY: " + to_string(caldata.fGyroGainY) + "\n";
-	fout << str ;
-
-	str = "fCrosstalkParaXA0: " + to_string(caldata.fCrosstalkParaXA0) + "\n";
-	fout << str ;
-	str = "fCrosstalkParaYA0: " + to_string(caldata.fCrosstalkParaYA0) + "\n";
-	fout << str ;
-	str = "fCrosstalkParaXB0: " + to_string(caldata.fCrosstalkParaXB0) + "\n";
-	fout << str ;
-	str = "fCrosstalkParaYB0: " + to_string(caldata.fCrosstalkParaYB0) + "\n";
-	fout << str ;
-	str = "fCrosstalkParaXC0: " + to_string(caldata.fCrosstalkParaXC0) + "\n";
-	fout << str ;
-	str = "fCrosstalkParaYC0: " + to_string(caldata.fCrosstalkParaYC0) + "\n";
-	fout << str ;
-
-	fout << "n16HallCodeX:	";
-	for (int i = 0; i < 9; i++)
-		fout << caldata.n16HallCodeX[i] << "	";
-	fout << endl;
-
-	fout << "n16HallCodeY:	";
-	for (int i = 0; i < 9; i++)
-		fout << caldata.n16HallCodeY[i] << "	";
-	fout << endl;
-
-	fout << "fLinearityXK:	";
-	for (int i = 0; i < 9; i++)
-		fout << caldata.fLinearityXK[i] << "	";
-	fout << endl;
-
-	fout << "fLinearityXB:	";
-	for (int i = 0; i < 9; i++)
-		fout << caldata.fLinearityXB[i] << "	";
-	fout << endl;
-
-	fout << "fLinearityYK:	";
-	for (int i = 0; i < 9; i++)
-		fout << caldata.fLinearityYK[i] << "	";
-	fout << endl;
-
-	fout << "fLinearityYB:	";
-	for (int i = 0; i < 9; i++)
-		fout << caldata.fLinearityYB[i] << "	";
-	fout << endl;
-
-	str = "fGyroSin: " + to_string(caldata.fGyroSin) + "\n";
-	fout << str ;
-	str = "fGyroCos: " + to_string(caldata.fGyroCos) + "\n";
-	fout << str ;
-	str = "fPixelStepX: " + to_string(caldata.fPixelStepX) + "\n";
-	fout << str ;
-	str = "fPixelStepY: " + to_string(caldata.fPixelStepY) + "\n";
-	fout << str ;
-	str = "n16LensOffsetX: " + to_string(caldata.n16LensOffsetX) + "\n";
-	fout << str ;
-	str = "n16LensOffsetY: " + to_string(caldata.n16LensOffsetY) + "\n";
-	fout << str ;
-
-	str = "fCrosstalkK0X: " + to_string(caldata.fCrosstalkK0X) + "\n";
-	fout << str ;
-	str = "fCrosstalkK1X: " + to_string(caldata.fCrosstalkK1X) + "\n";
-	fout << str ;
-	str = "fCrosstalkK0Y: " + to_string(caldata.fCrosstalkK0Y) + "\n";
-	fout << str ;
-	str = "fCrosstalkK1Y: " + to_string(caldata.fCrosstalkK1Y) + "\n";
-	fout << str ;
-
-	str = "fAfDriftParaXA0: " + to_string(caldata.fAfDriftParaXA0) + "\n";
-	fout << str ;
-	str = "fAfDriftParaYA0: " + to_string(caldata.fAfDriftParaYA0) + "\n";
-	fout << str ;
-	str = "fAfDriftParaXB0: " + to_string(caldata.fAfDriftParaXB0) + "\n";
-	fout << str ;
-	str = "fAfDriftParaYB0: " + to_string(caldata.fAfDriftParaYB0) + "\n";
-	fout << str ;
-	str = "fAfDriftParaXC0: " + to_string(caldata.fAfDriftParaXC0) + "\n";
-	fout << str ;
-	str = "fAfDriftParaYC0: " + to_string(caldata.fAfDriftParaYC0) + "\n";
-	fout << str ;
-
+	AW_read_Data();
 }
-
 
 int mAW_hall_check( float x, float y) {
 	int ret = 0;
@@ -3501,7 +3740,7 @@ void AFDRVCheck::on_pushButton_AW86006_Square_clicked() {
 
 	int ret = 0;	
 	string str;
-
+	AwSet7bitI2CSlaveAddr(0x48>>1);
 	ret = AwOisOff();
 	str = "AwOisOff(): " + to_string(ret) + "\n";
 	ui->log->insertPlainText(str.c_str());
@@ -3543,18 +3782,301 @@ void AFDRVCheck::on_pushButton_AW86006_Square_clicked() {
 	script_log.close();
 }
 
+void AFDRVCheck::on_pushButton_AW86006_Read_clicked() {
 
-void AFDRVCheck::on_pushButton_AW86006_Cross_Talk_clicked() {
+	int ret = 0, ack=0;
+	string str; INT16 hall[2];
+	ret = AwServeOn();
+	ret = AwFlashUpdate();
+	AW_read_Data();
+	ret = AwReadAdc(hall);
 
-	int ret = 0;
-	string str;
+	fout << "Hall X:	" << hall[0] << endl;
+	fout << "Hall Y:	" << hall[1] << endl;
 
-	ret = AwSetChipMode(2);
-	str = "AwSetChipMode(2): " + to_string(ret) + "\n";
+	BYTE pRdBuf[4] = { 0 };
+	BYTE slave = 0x49;
+	BYTE buf[4] = { 0x48, 0xF8, 0x9C, 0 };
+
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, buf, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &slave, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, pRdBuf, 2);
+
+	fout << "Lens offset X:	" << pRdBuf[0] + pRdBuf[1] * 256 << endl;
+
+	buf[2] = 0x9E;
+
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, buf, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &slave, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, pRdBuf, 2);
+
+	fout << "Lens offset Y:	" << pRdBuf[0] + pRdBuf[1] * 256 << endl;
+
+	buf[1] = 0xF7;
+	buf[2] = 0x04;
+
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, buf, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &slave, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, pRdBuf, 2);
+
+	fout << "PGA offset X:	" << pRdBuf[0] + pRdBuf[1] * 256 << endl;
+
+	buf[2] = 0x06;
+
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, buf, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &slave, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, pRdBuf, 2);
+
+	fout << "PGA offset Y:	" << pRdBuf[0] + pRdBuf[1] * 256 << endl;
+
+	str = "Lens offset read done\n";
 	ui->log->insertPlainText(str.c_str());
-
-
 
 }
 
+void AFDRVCheck::AW_read_Data() {
+	tCalData caldata;
+	int ret;
+	ret = AwGetCalData(&caldata);
+	string str = "AwGetCalData(): " + to_string(ret) + "\n";
+	ui->log->insertPlainText(str.c_str());
+
+	str = "byPgaGain_X: " + to_string(caldata.byPgaGain[0]) + "\n";
+	fout << str;
+	str = "byPgaGain_Y: " + to_string(caldata.byPgaGain[1]) + "\n";
+	fout << str;
+	str = "byHallBias_X: " + to_string(caldata.byHallBias[0]) + "\n";
+	fout << str;
+	str = "byHallBias_Y: " + to_string(caldata.byHallBias[1]) + "\n";
+	fout << str;
+	str = "u16HallOffset_X: " + to_string(caldata.u16HallOffset[0]) + "\n";
+	fout << str;
+	str = "u16HallOffset_Y: " + to_string(caldata.u16HallOffset[1]) + "\n";
+	fout << str;
+	str = "n16GyroOffset_X: " + to_string(caldata.n16GyroOffset[0]) + "\n";
+	fout << str;
+	str = "n16GyroOffset_Y: " + to_string(caldata.n16GyroOffset[1]) + "\n";
+	fout << str;
+	str = "fHallMaxX: " + to_string(caldata.fHallMaxX) + "\n";
+	fout << str;
+	str = "fHallMinX: " + to_string(caldata.fHallMinX) + "\n";
+	fout << str;
+	str = "fHallMaxY: " + to_string(caldata.fHallMaxY) + "\n";
+	fout << str;
+	str = "fHallMinY: " + to_string(caldata.fHallMinY) + "\n";
+	fout << str;
+	str = "fGyroGainX: " + to_string(caldata.fGyroGainX) + "\n";
+	fout << str;
+	str = "fGyroGainY: " + to_string(caldata.fGyroGainY) + "\n";
+	fout << str;
+
+	str = "fCrosstalkParaXA0: " + to_string(caldata.fCrosstalkParaXA0) + "\n";
+	fout << str;
+	str = "fCrosstalkParaYA0: " + to_string(caldata.fCrosstalkParaYA0) + "\n";
+	fout << str;
+	str = "fCrosstalkParaXB0: " + to_string(caldata.fCrosstalkParaXB0) + "\n";
+	fout << str;
+	str = "fCrosstalkParaYB0: " + to_string(caldata.fCrosstalkParaYB0) + "\n";
+	fout << str;
+	str = "fCrosstalkParaXC0: " + to_string(caldata.fCrosstalkParaXC0) + "\n";
+	fout << str;
+	str = "fCrosstalkParaYC0: " + to_string(caldata.fCrosstalkParaYC0) + "\n";
+	fout << str;
+
+	fout << "n16HallCodeX:	";
+	for (int i = 0; i < 9; i++)
+		fout << caldata.n16HallCodeX[i] << "	";
+	fout << endl;
+
+	fout << "n16HallCodeY:	";
+	for (int i = 0; i < 9; i++)
+		fout << caldata.n16HallCodeY[i] << "	";
+	fout << endl;
+
+	fout << "fLinearityXK:	";
+	for (int i = 0; i < 9; i++)
+		fout << caldata.fLinearityXK[i] << "	";
+	fout << endl;
+
+	fout << "fLinearityXB:	";
+	for (int i = 0; i < 9; i++)
+		fout << caldata.fLinearityXB[i] << "	";
+	fout << endl;
+
+	fout << "fLinearityYK:	";
+	for (int i = 0; i < 9; i++)
+		fout << caldata.fLinearityYK[i] << "	";
+	fout << endl;
+
+	fout << "fLinearityYB:	";
+	for (int i = 0; i < 9; i++)
+		fout << caldata.fLinearityYB[i] << "	";
+	fout << endl;
+
+	str = "fGyroSin: " + to_string(caldata.fGyroSin) + "\n";
+	fout << str;
+	str = "fGyroCos: " + to_string(caldata.fGyroCos) + "\n";
+	fout << str;
+	str = "fPixelStepX: " + to_string(caldata.fPixelStepX) + "\n";
+	fout << str;
+	str = "fPixelStepY: " + to_string(caldata.fPixelStepY) + "\n";
+	fout << str;
+	str = "n16LensOffsetX: " + to_string(caldata.n16LensOffsetX) + "\n";
+	fout << str;
+	str = "n16LensOffsetY: " + to_string(caldata.n16LensOffsetY) + "\n";
+	fout << str;
+
+	str = "fCrosstalkK0X: " + to_string(caldata.fCrosstalkK0X) + "\n";
+	fout << str;
+	str = "fCrosstalkK1X: " + to_string(caldata.fCrosstalkK1X) + "\n";
+	fout << str;
+	str = "fCrosstalkK0Y: " + to_string(caldata.fCrosstalkK0Y) + "\n";
+	fout << str;
+	str = "fCrosstalkK1Y: " + to_string(caldata.fCrosstalkK1Y) + "\n";
+	fout << str;
+
+	str = "fAfDriftParaXA0: " + to_string(caldata.fAfDriftParaXA0) + "\n";
+	fout << str;
+	str = "fAfDriftParaYA0: " + to_string(caldata.fAfDriftParaYA0) + "\n";
+	fout << str;
+	str = "fAfDriftParaXB0: " + to_string(caldata.fAfDriftParaXB0) + "\n";
+	fout << str;
+	str = "fAfDriftParaYB0: " + to_string(caldata.fAfDriftParaYB0) + "\n";
+	fout << str;
+	str = "fAfDriftParaXC0: " + to_string(caldata.fAfDriftParaXC0) + "\n";
+	fout << str;
+	str = "fAfDriftParaYC0: " + to_string(caldata.fAfDriftParaYC0) + "\n";
+	fout << str;
+
+}
+
+void AFDRVCheck::on_pushButton_AW86006_Slave_Change_clicked() {
+
+	int ret = 0, ack = 0; string str;
+
+	AwSet7bitI2CSlaveAddr(0xBA >> 1);
+
+	ret = AwI2cAddrModify(0xD2>>1);
+	str = "AwI2cAddrModify(): " + to_string(ret) + "\n";
+	ui->log->insertPlainText(str.c_str());
+
+	ret = AwResetChipAfterI2CModify();
+	str = "AwResetChipAfterI2CModify(): " + to_string(ret) + "\n";
+	ui->log->insertPlainText(str.c_str());
+
+	AwSet7bitI2CSlaveAddr(0xD2>>1);
+
+	BYTE Ver = 0;
+	ret = AwGetChipId(&Ver);
+	str = "AwGetChipId(): " + to_string(Ver) + "\n";
+	ui->log->insertPlainText(str.c_str());
+
+	str = "Slave Change done\n";
+	ui->log->insertPlainText(str.c_str());
+
+}
+
+void AFDRVCheck::on_pushButton_AW86006_Sine_clicked() {
+	OIS_range_ratio = ui->OIS_range->document()->toPlainText().toInt();
+	script_log.open("test_log.txt");
+	int ret = 0;string str;
+	AwSet7bitI2CSlaveAddr(0x48 >> 1);
+	//ret = AwServeOff();
+	//ret = AwOisOff();
+	//str = "AwOisOff(): " + to_string(ret) + "\n";
+	//ui->log->insertPlainText(str.c_str());
+	//ret = AwUnLockDebugProtect();
+	//str = "AwUnLockDebugProtect(): " + to_string(ret) + "\n";
+	//ui->log->insertPlainText(str.c_str());
+	//ret = AwWriteLoopStatus(1);
+	//str = "AwWriteLoopStatus(1): " + to_string(ret) + "\n";
+	//ui->log->insertPlainText(str.c_str());
+	//ret = AwOisOn();
+	//str = "AwOisOn(): " + to_string(ret) + "\n";
+	//ui->log->insertPlainText(str.c_str());
+	unsigned char nCircleValue = 5;
+	nCircleValue += int(1200 * OIS_range_ratio / 10000.0) << 4;
+
+	ret = AwDrawCircleOn(3, nCircleValue);
+	str = "AwDrawCircleOn(): " + to_string(ret) + "\n";
+	ui->log->insertPlainText(str.c_str());
+	float hall[1001][4];
+	IIC_Delayus(0.1f);
+	for (int i = 0; i < 1000; i++) {
+		IIC_Delayus(0.002f);
+		AwReadLineOut(hall[i]);
+	}
+
+	for (int i = 0; i < 1000; i++) {
+		script_log << hall[i][0] << "	" << hall[i][1] << endl;	
+	}
+
+	ret = AwDrawCircleOff(3, nCircleValue);
+	str = "AwDrawCircleOff(): " + to_string(ret) + "\n";
+	ui->log->insertPlainText(str.c_str());
+
+	ui->log->insertPlainText("OIS Sine Test done!");
+	script_log.close();
+}
+
+void AFDRVCheck::on_pushButton_AW86006_Vsync_clicked() {
+	OIS_range_ratio = ui->OIS_range->document()->toPlainText().toInt();
+	script_log.open("test_log.txt");
+	int ret = 0; string str; int ack = 0;
+	AwSet7bitI2CSlaveAddr(0x48 >> 1);
+
+	BYTE pRdBuf[4] = { 0 };
+	BYTE slave = 0x49;
+	BYTE buf[4] = { 0x48, 0x00, 0x03, 1 };
+
+	AwOisOff();
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, buf, 4);
+	AwOisOn();
+	IIC_Delayus(0.01f);
+	buf[2] = 0x00;
+
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, buf, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &slave, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, pRdBuf, 1);
+
+	buf[2] = 0x03;
+
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, buf, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &slave, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, pRdBuf, 1);
+	int x = pRdBuf[0];
+	str = "EIS_ON=	" + to_string(x) + "\n";
+	ui->log->insertPlainText(str.c_str());
+
+	buf[2] = 0x16;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, buf, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &slave, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, pRdBuf, 1);
+
+	if (ack != 0) {
+		ui->log->insertPlainText("OIS I2C NG!");
+	}
+	x = pRdBuf[0];
+	str = "OIS_EN=	"+ to_string(x) +"\n";
+	ui->log->insertPlainText(str.c_str());
+	ui->log->insertPlainText("OIS Vsync Test done!\n");
+	script_log.close();
+}
+
+void AFDRVCheck::on_pushButton_Slave_Scan_clicked() {
+
+	script_log.open("test_log.txt");
+	for (int x = 1; x < 256; x++) {
+
+		BYTE buf[4] = { x, 0, 0 ,0};
+		int ack = DG_I2cWrite(I2C.m_hCapture, 1, 1, buf, 4);
+		script_log << "slave: " << x << "ack  " << ack << endl;
+		if (ack == 0) {
+			string str = "slave has ack£º" + to_string(x)+'\n';
+			ui->log->insertPlainText(str.c_str());
+		}
+	}
+
+	script_log.close();
+}
 

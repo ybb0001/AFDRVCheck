@@ -1088,10 +1088,6 @@ typedef struct AFDRIFTOUTT1 {
 	FLOAT fCrossC0Y;
 }tAfDriftParOut;
 
-enum Axis {
-	X_AXIS = 0,
-	Y_AXIS = 1,
-};
 
 class DLLIMPORT CAW86006_OIS_API
 {
@@ -1253,6 +1249,15 @@ extern "C" {
 
 	// Reset Chip
 	DLLEXPORT INT AwResetChip();
+	
+	// Reset Chip by I2C Addr Modify
+	DLLEXPORT INT AwResetChipAfterI2CModify();
+	
+	// Auto Scan
+	DLLEXPORT INT AwAutoScan(BYTE *AddrList, BYTE* num);
+	
+	// Modify the I2C address
+	DLLEXPORT INT AwI2cAddrModify(BYTE SyncAddr);
 
 	// Download the firmware
 	DLLEXPORT INT AwBootControl(INT times = 20, INT delay_time = 2);
@@ -1284,7 +1289,9 @@ extern "C" {
 
 	DLLEXPORT INT AwGyroOffset();
 	DLLEXPORT INT AwGetCalData(tCalData* tpCalData);
+
 	DLLEXPORT INT AwGetVersionId(BYTE* bypIdBuff);
+	DLLEXPORT INT AwGetChipId(BYTE* bypIdBuff);
 
 	DLLEXPORT INT AwUnLockFlashProtect();
 	DLLEXPORT INT AwLockFlashProtect();
@@ -1391,7 +1398,8 @@ extern "C" {
 	DLLEXPORT INT AwWriteAcclGainY(FLOAT fValue);
 	DLLEXPORT INT AwReadAcclGain(FLOAT* fpBuff);
 
-
+	DLLEXPORT BYTE AwGet7bitI2CSlaveAddr();
+	DLLEXPORT void AwSet7bitI2CSlaveAddr(BYTE byAddr);
 
 #ifdef __cplusplus
 }
