@@ -40,7 +40,7 @@ public slots:
 	void on_pushButton_AF_Aging_OnSemi_clicked();
 
 	void on_pushButton_Slave_Scan_clicked();
-
+	void on_pushButton_save_clicked();
 	void on_pushButton_Cphy_clicked();
 	void on_pushButton_CH0_clicked();
 	void on_pushButton_CH1_clicked();
@@ -76,8 +76,11 @@ public slots:
 	void on_pushButton_BU24532_Iris_off_clicked();
 
 	void on_pushButton_DW1_clicked();
-
 	void on_pushButton_DW2_clicked();
+
+	void on_pushButton_DW9828C_Read_clicked();
+
+
 	void on_pushButton_7323_clicked();
 	void on_pushButton_AW86006_init_clicked();
 	void on_pushButton_AW86006_FW_clicked();
@@ -87,11 +90,13 @@ public slots:
 	void on_pushButton_AW86006_Slave_Change_clicked();
 	void on_pushButton_AW86006_Sine_clicked();
 	void on_pushButton_AW86006_Vsync_clicked();
+	void on_pushButton_AW86006_Gain_Write_clicked();
 	
 	void AW_read_Data();
 	
 	void on_pushButton_AF_Aging_Stop_clicked();
 	void display_EEP();
+	void load_Setting();
 	void read_Setting();
 	int BU24532_hall_read();
 	int BU24532_OIS_move(int x, int y);

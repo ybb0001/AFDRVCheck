@@ -130,6 +130,7 @@ public:
     QWidget *tab_4;
     QPushButton *pushButton_DW2;
     QPushButton *pushButton_DW1;
+    QPushButton *pushButton_DW9828C_Read;
     QWidget *tab_5;
     QPushButton *pushButton_read_AF_OnSemi;
     QPushButton *pushButton_LC89812X;
@@ -151,6 +152,7 @@ public:
     QPushButton *pushButton_AW86006_Slave_Change;
     QPushButton *pushButton_AW86006_Sine;
     QPushButton *pushButton_AW86006_Vsync;
+    QPushButton *pushButton_AW86006_Gain_Write;
     QWidget *tab_2;
     QGroupBox *groupBox_4;
     QPushButton *pushButton_AF_Aging_OnSemi;
@@ -173,10 +175,11 @@ public:
     QLabel *label_19;
     QPushButton *pushButton_AF_Aging_Stop;
     QPushButton *pushButton_AF_Aging;
+    QPushButton *pushButton_save;
     QButtonGroup *buttonGroup_3;
+    QButtonGroup *buttonGroup;
     QButtonGroup *buttonGroup_4;
     QButtonGroup *buttonGroup_2;
-    QButtonGroup *buttonGroup;
 
     void setupUi(QWidget *EEPROM)
     {
@@ -442,7 +445,7 @@ public:
         pushButton_GPIO_All->setCheckable(false);
         pushButton_Load = new QPushButton(EEPROM);
         pushButton_Load->setObjectName(QStringLiteral("pushButton_Load"));
-        pushButton_Load->setGeometry(QRect(350, 170, 81, 30));
+        pushButton_Load->setGeometry(QRect(360, 170, 71, 30));
         pushButton_Load->setCheckable(false);
         tabWidget = new QTabWidget(EEPROM);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
@@ -535,6 +538,10 @@ public:
         pushButton_DW1->setObjectName(QStringLiteral("pushButton_DW1"));
         pushButton_DW1->setGeometry(QRect(0, 0, 100, 30));
         pushButton_DW1->setCheckable(false);
+        pushButton_DW9828C_Read = new QPushButton(tab_4);
+        pushButton_DW9828C_Read->setObjectName(QStringLiteral("pushButton_DW9828C_Read"));
+        pushButton_DW9828C_Read->setGeometry(QRect(0, 60, 100, 30));
+        pushButton_DW9828C_Read->setCheckable(false);
         tabWidget->addTab(tab_4, QString());
         tab_5 = new QWidget();
         tab_5->setObjectName(QStringLiteral("tab_5"));
@@ -615,6 +622,10 @@ public:
         pushButton_AW86006_Vsync->setObjectName(QStringLiteral("pushButton_AW86006_Vsync"));
         pushButton_AW86006_Vsync->setGeometry(QRect(100, 150, 100, 30));
         pushButton_AW86006_Vsync->setCheckable(false);
+        pushButton_AW86006_Gain_Write = new QPushButton(tab_8);
+        pushButton_AW86006_Gain_Write->setObjectName(QStringLiteral("pushButton_AW86006_Gain_Write"));
+        pushButton_AW86006_Gain_Write->setGeometry(QRect(100, 180, 100, 30));
+        pushButton_AW86006_Gain_Write->setCheckable(false);
         tabWidget->addTab(tab_8, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
@@ -644,7 +655,7 @@ public:
         tabWidget->addTab(tab_2, QString());
         pushButton_script = new QPushButton(EEPROM);
         pushButton_script->setObjectName(QStringLiteral("pushButton_script"));
-        pushButton_script->setGeometry(QRect(270, 170, 71, 30));
+        pushButton_script->setGeometry(QRect(280, 170, 71, 30));
         pushButton_script->setCheckable(false);
         groupBox_5 = new QGroupBox(EEPROM);
         groupBox_5->setObjectName(QStringLiteral("groupBox_5"));
@@ -700,6 +711,10 @@ public:
         pushButton_AF_Aging->setObjectName(QStringLiteral("pushButton_AF_Aging"));
         pushButton_AF_Aging->setGeometry(QRect(305, 15, 41, 30));
         pushButton_AF_Aging->setCheckable(false);
+        pushButton_save = new QPushButton(EEPROM);
+        pushButton_save->setObjectName(QStringLiteral("pushButton_save"));
+        pushButton_save->setGeometry(QRect(360, 205, 71, 30));
+        pushButton_save->setCheckable(false);
         groupBox_5->raise();
         log->raise();
         groupBox_3->raise();
@@ -759,10 +774,11 @@ public:
         pushButton_Load->raise();
         tabWidget->raise();
         pushButton_script->raise();
+        pushButton_save->raise();
 
         retranslateUi(EEPROM);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(EEPROM);
@@ -770,7 +786,7 @@ public:
 
     void retranslateUi(QWidget *EEPROM)
     {
-        EEPROM->setWindowTitle(QApplication::translate("EEPROM", "EnvyLogic Controller_20230419", Q_NULLPTR));
+        EEPROM->setWindowTitle(QApplication::translate("EEPROM", "EnvyLogic Controller_20230714", Q_NULLPTR));
         pushButton_read->setText(QApplication::translate("EEPROM", "Read", Q_NULLPTR));
         label->setText(QApplication::translate("EEPROM", "Check Result", Q_NULLPTR));
         pushButton_write->setText(QApplication::translate("EEPROM", "Write", Q_NULLPTR));
@@ -779,7 +795,7 @@ public:
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A2</p></body></html>", Q_NULLPTR));
+"<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">4C</p></body></html>", Q_NULLPTR));
         label_6->setText(QApplication::translate("EEPROM", "Addr_H/L", Q_NULLPTR));
         addH->setHtml(QApplication::translate("EEPROM", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -921,6 +937,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("EEPROM", "ROHM", Q_NULLPTR));
         pushButton_DW2->setText(QApplication::translate("EEPROM", "DW9781 Cls Sin", Q_NULLPTR));
         pushButton_DW1->setText(QApplication::translate("EEPROM", "DW9781 Open Sin", Q_NULLPTR));
+        pushButton_DW9828C_Read->setText(QApplication::translate("EEPROM", "DW9828C Read", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("EEPROM", "DW", Q_NULLPTR));
         pushButton_read_AF_OnSemi->setText(QApplication::translate("EEPROM", "Onsemi AF_Read", Q_NULLPTR));
         pushButton_LC89812X->setText(QApplication::translate("EEPROM", "LC89812X On", Q_NULLPTR));
@@ -942,6 +959,7 @@ public:
         pushButton_AW86006_Slave_Change->setText(QApplication::translate("EEPROM", "AW86006 Slave", Q_NULLPTR));
         pushButton_AW86006_Sine->setText(QApplication::translate("EEPROM", "AW86006 Sine", Q_NULLPTR));
         pushButton_AW86006_Vsync->setText(QApplication::translate("EEPROM", "AW86006 Vsync", Q_NULLPTR));
+        pushButton_AW86006_Gain_Write->setText(QApplication::translate("EEPROM", "AW Gain Write", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_8), QApplication::translate("EEPROM", "AW", Q_NULLPTR));
         groupBox_4->setTitle(QApplication::translate("EEPROM", "Aging", Q_NULLPTR));
         pushButton_AF_Aging_OnSemi->setText(QApplication::translate("EEPROM", "OnSemi AF_Aging", Q_NULLPTR));
@@ -968,7 +986,7 @@ public:
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">300000</p></body></html>", Q_NULLPTR));
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">10</p></body></html>", Q_NULLPTR));
         Delay->setHtml(QApplication::translate("EEPROM", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -977,6 +995,7 @@ public:
         label_19->setText(QApplication::translate("EEPROM", "Delay", Q_NULLPTR));
         pushButton_AF_Aging_Stop->setText(QApplication::translate("EEPROM", "Stop", Q_NULLPTR));
         pushButton_AF_Aging->setText(QApplication::translate("EEPROM", "Life", Q_NULLPTR));
+        pushButton_save->setText(QApplication::translate("EEPROM", "Save", Q_NULLPTR));
     } // retranslateUi
 
 };

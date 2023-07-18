@@ -28,7 +28,7 @@ char chk[2];
 unsigned char slave, addr_H, addr_L;
 unsigned char data_LSB[4];
 int yy = 0x200000,OIS_range_ratio=80, m_Aging_Times=300000;
-int CH = 0;
+int CH = 0, test_Times=10;
 
 int Value_init = -1;
 int Value_Cards = -1;
@@ -162,7 +162,6 @@ void AFDRVCheck::eepLockOpen() {
 	}
 }
 
-
 void  AFDRVCheck::eepLockClose() {
 	DC_I2cInit(0, 0, 1, 1);
 	Value_I2cStart = DC_I2cStart(0, 0);
@@ -174,14 +173,12 @@ void  AFDRVCheck::eepLockClose() {
 	Sleep(10);
 }
 
-
 unsigned char getUchar() {
 	if (src.length() < 2)
 		return 0;
 	unsigned char s = getHexValue(src[0])*16+ getHexValue(src[1]);
 	return s;
 }
-
 
 void AFDRVCheck::displayText(QString s) {
 
@@ -190,11 +187,28 @@ void AFDRVCheck::displayText(QString s) {
 
 }
 
-
 void  AFDRVCheck::displayNum(int n) {
 	ui->AF_Times->setText(QString::number(n));
 }
 
+
+void  AFDRVCheck::load_Setting() {
+
+	slave = GetPrivateProfileInt(TEXT("TEST_OPTION"), TEXT("Slave"), 0xA0, TEXT(".\\Setting\\Setting.ini"));
+
+	QString str = "00";
+	int a1 = slave / 16;
+	int b1 = slave % 16;
+	if (a1 > 9)str[0] = 'A' + a1 - 10;
+	else str[0] = '0' + a1;
+	if (b1 > 9)str[1] = 'A' + b1 - 10;
+	else str[1] = '0' + b1;
+
+	ui->slave->setText(str);
+	test_Times = GetPrivateProfileInt(TEXT("TEST_OPTION"), TEXT("Test_Times"), 10, TEXT(".\\Setting\\Setting.ini"));
+	ui->AF_Times->setText(to_string(test_Times).c_str());
+
+}
 
 void  AFDRVCheck::read_Setting() {
 	
@@ -212,7 +226,11 @@ void  AFDRVCheck::read_Setting() {
 
 }
 
+void  AFDRVCheck::on_pushButton_save_clicked() {
 
+	//memset(DecData, 0, sizeof(DecData));
+
+}
 
 void AFDRVCheck::GPIO_display() {
 
@@ -724,7 +742,7 @@ AFDRVCheck::AFDRVCheck(QWidget *parent) :
 	pExtFuncList->pFunc_I2C_Write = awI2CWrite;
 	pExtFuncList->pFunc_OutputLog = awOutputLog;
 	AW86006.OIS_ExtFuncInit(pExtFuncList);
-
+	load_Setting();
 }
 
 int pDeviceInfoCount = 0;
@@ -1889,13 +1907,13 @@ void AFDRVCheck::on_pushButton_script_clicked() {
 
 }
 
-
 void AFDRVCheck::on_pushButton_DW1_clicked() {
 
 	script_log.open(".\\test_log.txt");
 	int ack = 0, e = 0, N=2;
+	N = ui->AF_Times->document()->toPlainText().toInt();
 
-	unsigned char DW_Data[5] = {0xE4,0x70,0x15,0,2}, Read_slave=0xE5;
+	unsigned char DW_Data[5] = { slave,0x70,0x15,0,2}, Read_slave= slave+1;
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 5);
 	Sleep(10);
 	DW_Data[2] = 0x20;
@@ -1915,13 +1933,13 @@ void AFDRVCheck::on_pushButton_DW1_clicked() {
 			if (m < 0)
 				m += 65536;
 
-			unsigned char DW_Data1[5] = { 0xE4,0x70,0x20,(unsigned char)(m / 256),(unsigned char)(m % 256) };
+			unsigned char DW_Data1[5] = { slave,0x70,0x20,(unsigned char)(m / 256),(unsigned char)(m % 256) };
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data1, 5);
-			unsigned char DW_Data2[5] = { 0xE4,0x70,0x21,(unsigned char)(m / 256),(unsigned char)(m % 256) };
+			unsigned char DW_Data2[5] = { slave,0x70,0x21,(unsigned char)(m / 256),(unsigned char)(m % 256) };
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data2, 5);
 			Sleep(1);
 
-			unsigned char DW_Data3[3] = { 0xE4,0x70,0x46};
+			unsigned char DW_Data3[3] = { slave,0x70,0x46};
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 3);
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
 			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
@@ -1948,6 +1966,138 @@ void AFDRVCheck::on_pushButton_DW1_clicked() {
 
 	
 	ui->log->insertPlainText("DW9781 run finished \n");
+	script_log.close();
+
+}
+
+void AFDRVCheck::on_pushButton_DW2_clicked() {
+	read_Setting();
+	script_log.open(".\\test_log.txt");
+	ofstream test_log(".\\test_log1.txt");
+	int ack = 0, e = 0, N = 10, hall = 0, X_center = -1, Y_center = -1;
+	N = ui->AF_Times->document()->toPlainText().toInt();
+
+	unsigned char DW_Data[5] = { slave,0x70,0x15,0,1 }, Read_slave = slave + 1;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 5);
+	Sleep(300);
+
+	DW_Data[2] = 0x46;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+	hall = (DecData[0] * 256 + DecData[1]);
+	if (hall > 10000)
+		hall = hall - 65536;
+	X_center = hall;
+	test_log << X_center << "	";
+	DW_Data[2] = 0x47;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 3);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+	hall = (DecData[0] * 256 + DecData[1]);
+	if (hall > 10000)
+		hall = hall - 65536;
+	Y_center = hall;
+	test_log << Y_center << endl;
+	OIS_range_ratio = ui->OIS_range->document()->toPlainText().toInt();
+	int hall_range = 2048 * OIS_range_ratio / 100;
+
+	for (int x = 0; x < N; x++) {
+
+		for (int a = 0; a < 200; a++) {
+			ack = 0;
+			float d = sin(3.1415926*a / 100);
+			short m = d * hall_range - X_center;
+			//			short m = d * hall_range ;
+			test_log << m << "	";
+
+			if (m < 0)
+				m += 65536;
+
+			unsigned char DW_Data1[5] = { slave,0x70,0x25,(unsigned char)(m / 256),(unsigned char)(m % 256) };
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data1, 5);
+
+			d = sin(3.1415926*a / 100.0);
+			//		d = sin(3.1415926*(2 - (a / 100.0)));
+			short m1 = d * hall_range - Y_center;
+			//			short m1 = d * hall_range ;
+			test_log << m1 << endl;
+
+			if (m1 < 0)
+				m1 += 65536;
+
+			unsigned char DW_Data2[5] = { slave,0x70,0x26,(unsigned char)(m1 / 256),(unsigned char)(m1 % 256) };
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data2, 5);
+			Sleep(1);
+			if (x == 0 && a == 0)
+				Sleep(200);
+			else
+				Sleep(1);
+			unsigned char DW_Data3[3] = { slave,0x70,0x46 };
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 3);
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
+			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+			hall = DecData[0] * 256 + DecData[1];
+			if (hall > 10000)
+				hall = hall - 65536;
+
+			script_log << hall << "	";
+
+			unsigned char DW_Data4[3] = { slave,0x70,0x47 };
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data4, 3);
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
+			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+			hall = DecData[0] * 256 + DecData[1];
+			if (hall > 10000)
+				hall = hall - 65536;
+
+			script_log << hall << endl;
+
+		}
+	}
+
+	ui->log->insertPlainText("DW9781 run finished \n");
+	script_log.close();
+	test_log.close();
+}
+
+void AFDRVCheck::on_pushButton_DW9828C_Read_clicked() {
+
+	script_log.open(".\\test_log.txt");
+	int ack = 0, e = 0, N = 2;
+
+	unsigned char DW_Data[5] = { 0x1C,0x08,0x15,0,2 }, Read_slave = 0x1D;
+	unsigned char DW_Data2[5] = { 0x9C,0x08,0x15,0,2 }, Read_slave2 = 0x9D;
+
+		for (int a = 0; a < 1000; a++) {
+
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 2);
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
+			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+			int hall = DecData[0] * 256 + DecData[1];
+			if (hall > 32768)
+				hall = hall - 65536;
+
+			script_log << hall << "	";
+
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data2,2);
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave2, 1);
+			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+			hall = DecData[0] * 256 + DecData[1];
+			if (hall > 32768)
+				hall = hall - 65536;
+
+			script_log << hall << endl;
+			IIC_Delay(2);
+		}
+	
+	ui->log->insertPlainText("DW9828C read finished \n");
 	script_log.close();
 
 }
@@ -2890,107 +3040,6 @@ void AFDRVCheck::on_pushButton_BU24532_Iris_off_clicked() {
 
 	ui->log->insertPlainText("BU24532 Iris Move to Small \n");
 	ui->log->insertPlainText(str.c_str());
-}
-
-
-void AFDRVCheck::on_pushButton_DW2_clicked() {
-
-	script_log.open(".\\test_log.txt");
-	ofstream test_log(".\\test_log1.txt");
-	int ack = 0, e = 0, N = 5, hall = 0, X_center = -1, Y_center = -1;
-
-	unsigned char DW_Data[5] = { 0xE4,0x70,0x15,0,1 }, Read_slave = 0xE5;
-	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 5);
-	//Sleep(10);
-	//DW_Data[2] = 0x25;
-	//DW_Data[3] = 0;
-	//DW_Data[4] = 0;
-	//ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 5);
-	//DW_Data[2] = 0x26;
-	//ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 5);
-	Sleep(500);
-
-	DW_Data[2] = 0x46;
-	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 3);
-	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
-	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
-
-	hall = (DecData[0] * 256 + DecData[1]);
-	if (hall > 10000)
-		hall = hall - 65536;
-	X_center = hall;
-	test_log << X_center << "	";
-	DW_Data[2] = 0x47;
-	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 3);
-	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
-	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
-
-	hall = (DecData[0] * 256 + DecData[1]);
-	if (hall > 10000)
-		hall = hall - 65536;
-	Y_center = hall;
-	test_log << Y_center << endl;
-	OIS_range_ratio = ui->OIS_range->document()->toPlainText().toInt();
-	int hall_range = 2048*OIS_range_ratio/100;
-
-	for (int x = 0; x < N; x++) {
-
-		for (int a = 0; a < 200; a++) {
-			ack = 0;
-			float d = sin(3.1415926*a / 100);
-			short m = d * hall_range - X_center;
-//			short m = d * hall_range ;
-			test_log << m << "	";
-
-			if (m < 0)
-				m += 65536;
-
-			unsigned char DW_Data1[5] = { 0xE4,0x70,0x25,(unsigned char)(m / 256),(unsigned char)(m % 256) };
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data1, 5);
-
-			d = sin(3.1415926*a/100.0);
-	//		d = sin(3.1415926*(2 - (a / 100.0)));
-			short m1 = d * hall_range - Y_center;
-//			short m1 = d * hall_range ;
-			test_log << m1 << endl;
-
-			if (m1 < 0)
-				m1 += 65536;
-
-			unsigned char DW_Data2[5] = { 0xE4,0x70,0x26,(unsigned char)(m1 / 256),(unsigned char)(m1 % 256) };
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data2, 5);
-			Sleep(1);
-			if(x==0&&a==0)
-				Sleep(200);
-
-			unsigned char DW_Data3[3] = { 0xE4,0x70,0x46 };
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 3);
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
-			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
-
-			hall = DecData[0] * 256 + DecData[1];
-			if (hall > 10000)
-				hall = hall - 65536;
-
-			script_log << hall << "	";
-
-			unsigned char DW_Data4[3] = { 0xE4,0x70,0x47 };
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data4, 3);
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
-			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
-
-			hall = DecData[0] * 256 + DecData[1];
-			if (hall > 10000)
-				hall = hall - 65536;
-
-			script_log << hall << endl;
-
-		}
-	}
-
-	ui->log->insertPlainText("DW9781 run finished \n");
-	script_log.close();
-	test_log.close();
 }
 
 
@@ -4080,3 +4129,15 @@ void AFDRVCheck::on_pushButton_Slave_Scan_clicked() {
 	script_log.close();
 }
 
+void AFDRVCheck::on_pushButton_AW86006_Gain_Write_clicked() {
+
+	UINT32 xGain = 0xC1138096;
+	UINT32 yGain = 0xC1073C01;
+
+	int ret = AwWriteGyroGain0Y(*(float *)&yGain);
+	ret += AwWriteGyroGain0X(*(float *)&xGain);
+	ret += AwFlashUpdate();
+
+	string str = "AW write Gyro Gain£º" + to_string(ret) + '\n';
+	ui->log->insertPlainText(str.c_str());
+}
