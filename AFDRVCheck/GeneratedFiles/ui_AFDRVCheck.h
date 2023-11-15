@@ -127,6 +127,7 @@ public:
     QPushButton *pushButton_BU24721_DC;
     QPushButton *pushButton_BU24721_Drive;
     QPushButton *pushButton_BU24532_Life;
+    QPushButton *pushButton_BU24631_Sine;
     QWidget *tab_4;
     QPushButton *pushButton_DW2;
     QPushButton *pushButton_DW1;
@@ -176,10 +177,10 @@ public:
     QPushButton *pushButton_AF_Aging_Stop;
     QPushButton *pushButton_AF_Aging;
     QPushButton *pushButton_save;
-    QButtonGroup *buttonGroup_3;
     QButtonGroup *buttonGroup;
-    QButtonGroup *buttonGroup_4;
     QButtonGroup *buttonGroup_2;
+    QButtonGroup *buttonGroup_3;
+    QButtonGroup *buttonGroup_4;
 
     void setupUi(QWidget *EEPROM)
     {
@@ -527,6 +528,10 @@ public:
         pushButton_BU24532_Life->setObjectName(QStringLiteral("pushButton_BU24532_Life"));
         pushButton_BU24532_Life->setGeometry(QRect(105, 145, 100, 30));
         pushButton_BU24532_Life->setCheckable(false);
+        pushButton_BU24631_Sine = new QPushButton(tab_3);
+        pushButton_BU24631_Sine->setObjectName(QStringLiteral("pushButton_BU24631_Sine"));
+        pushButton_BU24631_Sine->setGeometry(QRect(204, 55, 100, 30));
+        pushButton_BU24631_Sine->setCheckable(false);
         tabWidget->addTab(tab_3, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
@@ -778,7 +783,7 @@ public:
 
         retranslateUi(EEPROM);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(EEPROM);
@@ -918,12 +923,12 @@ public:
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">-256</p></body></html>", Q_NULLPTR));
+"<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0</p></body></html>", Q_NULLPTR));
         decenter_BU24721Y->setHtml(QApplication::translate("EEPROM", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">-256</p></body></html>", Q_NULLPTR));
+"<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0</p></body></html>", Q_NULLPTR));
         label_4->setText(QApplication::translate("EEPROM", "Center offset X/Y", Q_NULLPTR));
         pushButton_BU24532_Read->setText(QApplication::translate("EEPROM", "BU24532 Read", Q_NULLPTR));
         pushButton_BU24532_Drive->setText(QApplication::translate("EEPROM", "BU24532 Drive", Q_NULLPTR));
@@ -934,6 +939,7 @@ public:
         pushButton_BU24721_DC->setText(QApplication::translate("EEPROM", "BU24721 DC_Sen", Q_NULLPTR));
         pushButton_BU24721_Drive->setText(QApplication::translate("EEPROM", "BU24721 Drive", Q_NULLPTR));
         pushButton_BU24532_Life->setText(QApplication::translate("EEPROM", "BU24532 Life", Q_NULLPTR));
+        pushButton_BU24631_Sine->setText(QApplication::translate("EEPROM", "BU24631 Sine", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("EEPROM", "ROHM", Q_NULLPTR));
         pushButton_DW2->setText(QApplication::translate("EEPROM", "DW9781 Cls Sin", Q_NULLPTR));
         pushButton_DW1->setText(QApplication::translate("EEPROM", "DW9781 Open Sin", Q_NULLPTR));

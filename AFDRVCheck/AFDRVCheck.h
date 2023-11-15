@@ -74,6 +74,10 @@ public slots:
 	void on_pushButton_BU24532_Test_clicked();
 	void on_pushButton_BU24532_Iris_on_clicked();
 	void on_pushButton_BU24532_Iris_off_clicked();
+	int BU24532_hall_read();
+
+	int BU24631_hall_read();
+	void on_pushButton_BU24631_Sine_clicked();
 
 	void on_pushButton_DW1_clicked();
 	void on_pushButton_DW2_clicked();
@@ -98,8 +102,10 @@ public slots:
 	void display_EEP();
 	void load_Setting();
 	void read_Setting();
-	int BU24532_hall_read();
+
 	int BU24532_OIS_move(int x, int y);
+
+	int Rohm_Statu_check();
 	
 	void on_pushButton_read_OIS_clicked();
 	void keyPressEvent(QKeyEvent *event);

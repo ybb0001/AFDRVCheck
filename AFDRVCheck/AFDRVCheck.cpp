@@ -2123,7 +2123,7 @@ int AFDRVCheck::bu24721_Status_check() {
 void AFDRVCheck::on_pushButton_BU24721_clicked() {
 
 	script_log.open(".\\test_log.txt");
-	int ack = 0, e = 0, N = 2, mStatus=0;
+	int ack = 0, e = 0, N = 5, mStatus=0;
 	unsigned char DW_Data[5] = { 0x7C,0xF0,0x20,1,0 }, Read_slave = 0x7D;
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data, 4);
 	mStatus = bu24721_Status_check();
@@ -2190,44 +2190,43 @@ void AFDRVCheck::on_pushButton_BU24721_clicked() {
 
 	int hall_XY[10000][2] = { 0 }, k = 0;
 
-	for (int x = 0; x < N; x++) {
-		for (int a = 0; a < 200; a++) {
-			ack = 0;
-			unsigned char DW_Data3[4] = { 0x7C,0xF0,0x60,0 };
-			DW_Data3[2] = 0x24;
-			DecData[0] = 0; int cnt = 0;
-			while (DecData[0] == 0&& cnt<20) {
-				ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
-				ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
-				IIC_Delayus(0.001);
-				cnt++;
-			}
-
-			DW_Data3[2] = 0x62;
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 4);
-			DW_Data3[2] = 0x62;
+	for (int a = 0; a < 2000; a++) {
+		ack = 0;
+		unsigned char DW_Data3[4] = { 0x7C,0xF0,0x60,0 };
+		DW_Data3[2] = 0x24;
+		DecData[0] = 0; int cnt = 0;
+		while (DecData[0] == 0 && cnt < 30) {
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 3);
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
-			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
-
-			int hall = DecData[0]*256+ DecData[1];
-			if (hall > 0x7FFF)
-				hall = hall - 65536;
-			hall_XY[k][0] = hall;
-
-			unsigned char DW_Data4[4] = { 0x7C,0xF0,0x60,1 };
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data4, 4);
-			DW_Data4[2] = 0x62;
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data4, 3);
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
-			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
-
-			hall = DecData[0] * 256 + DecData[1];
-			if (hall > 0x7FFF)
-				hall = hall - 65536;
-			hall_XY[k++][1] = hall;
-
+			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 1);
+			IIC_Delayus(0.001);
+			cnt++;
 		}
+
+		DW_Data3[2] = 0x60;
+		DW_Data3[3] = 0;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 4);
+		DW_Data3[2] = 0x62;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 3);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
+		ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+		int hall = DecData[0] * 256 + DecData[1];
+		if (hall > 0x7FFF)
+			hall = hall - 65536;
+		hall_XY[k][0] = hall;
+
+		unsigned char DW_Data4[4] = { 0x7C,0xF0,0x60,1 };
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data4, 4);
+		DW_Data4[2] = 0x62;
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data4, 3);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
+		ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+		hall = DecData[0] * 256 + DecData[1];
+		if (hall > 0x7FFF)
+			hall = hall - 65536;
+		hall_XY[k++][1] = hall;
 	}
 
 	DW_Data[2] = 0x30;
@@ -2243,7 +2242,20 @@ void AFDRVCheck::on_pushButton_BU24721_clicked() {
 
 	ui->log->insertPlainText("BU24721 Sine Wave run finished \n");
 	script_log.close();
+	//BYTE rData[2] = { 0, };
+	////N2 int xch_adc, ych_adc;
+	//short xch_adc, ych_adc;
 
+	//if (ch == 0x00) {
+	//	if (RegRead(BU24721_REG_ADDR_GYRO_DATA_OUTPUT5, rData, 2)) return ERR_OIS_IIC;
+	//	xch_adc = MAKEWORD(rData[0], rData[1]);
+	//	return xch_adc;
+	//}
+	//else if (ch == 0x01) {
+	//	if (RegRead(BU24721_REG_ADDR_GYRO_DATA_OUTPUT6, rData, 2)) return ERR_OIS_IIC;
+	//	ych_adc = MAKEWORD(rData[0], rData[1]);
+	//	return ych_adc;
+	//}
 }
 
 
@@ -2548,11 +2560,14 @@ void AFDRVCheck::on_pushButton_BU24532_Sine_clicked() {
 
 	script_log.open(".\\test_log.txt");
 	int ack = 0, e = 0, N = 3;
-	unsigned char OIS_Data[5] = { 0x7C,0xF0,0x20,0x04,0 }, OIS_slave_Read = 0x7D;
+	unsigned char OIS_Data[5] = { 0x7C,0x60,0x20,0x01,0 }, OIS_slave_Read = 0x7D;
 	OIS_range_ratio = ui->OIS_range->document()->toPlainText().toInt();
 	float d = 0.001;
-	unsigned char OIS_Data3[4] = { 0x7C,0x60,0x60,0 };
 	unsigned char OIS_Data1[5] = { 0x7C,0x61,0xDC,0x03,0 };
+	unsigned char OIS_Data3[5] = { 0x7C,0x60,0x60,0,0 };
+
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
+	IIC_Delayus(0.01f);
 
 	for (int x = 0; x < N; x++) {
 		for (int a = 0; a < 256; a++) {
@@ -2579,7 +2594,7 @@ void AFDRVCheck::on_pushButton_BU24532_Sine_clicked() {
 			BU24532_hall_read();
 		}
 	}
-	ui->log->insertPlainText("BU24532 Hall read \n");
+	ui->log->insertPlainText("BU24532 Sine read \n");
 	script_log.close();
 }
 
@@ -2654,7 +2669,7 @@ void AFDRVCheck::on_pushButton_BU24532_Drive_clicked() {
 
 	script_log.open(".\\test_log.txt");
 	int ack = 0, e = 0, N = 100000;
-	unsigned char Iris_Data[5] = { 0x18,0xF0,0x20,1,0 }, AF_slave_Read = 0x19;
+	unsigned char Iris_Data[5] = { 0x7C,0xF0,0x20,1,0 }, AF_slave_Read = 0x19;
 	unsigned char OIS_Data[5] = { 0x7C,0x60,0x20,0x01,0 }, OIS_slave_Read = 0x7D;
 	unsigned char OIS_Data1[5] = { 0x7C,0x61,0xDC,0x03,0 };
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
@@ -2877,12 +2892,12 @@ void AFDRVCheck::on_pushButton_BU24532_Life_clicked() {
 int AFDRVCheck::BU24532_hall_read() {
 	unsigned char OIS_Data3[5] = { 0x7C,0x60,0x60,0,0 }, OIS_slave_Read = 0x7D;;
 	int ack = 0;	float d = 0;
-	OIS_Data3[1] = 0x60;
-	OIS_Data3[2] = 0x60;
-	OIS_Data3[3] = 0x00;
+	OIS_Data3[1] = 0x61;
+	OIS_Data3[2] = 0x9B;
+	OIS_Data3[3] = 0x03;
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
 	IIC_Delayus(d);
-	OIS_Data3[2] = 0x62;
+	OIS_Data3[2] = 0x9C;
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
 	IIC_Delayus(d);
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
@@ -2892,11 +2907,11 @@ int AFDRVCheck::BU24532_hall_read() {
 		hall = hall - 65536;
 	script_log << hall << "	";
 
-	OIS_Data3[2] = 0x60;
-	OIS_Data3[3] = 0x01;
+	OIS_Data3[2] = 0x9B;
+	OIS_Data3[3] = 0x04;
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
 	IIC_Delayus(d);
-	OIS_Data3[2] = 0x62;
+	OIS_Data3[2] = 0x9C;
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
 	IIC_Delayus(d);
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
@@ -2905,28 +2920,28 @@ int AFDRVCheck::BU24532_hall_read() {
 	hall = DecData[0] * 256 + DecData[1];
 	if (hall > 0x7FFF)
 		hall = hall - 65536;
-	script_log << hall << "	";
+	//script_log << hall << "	";
 
-	OIS_Data3[1] = 0x61;
-	OIS_Data3[2] = 0xDE;
-	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
-	IIC_Delayus(d);
-	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
-	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
-	hall = DecData[0] * 256 + DecData[1];
-	if (hall > 0x7FFF)
-		hall = hall - 65536;
-	script_log << hall << "	";
+	//OIS_Data3[1] = 0x61;
+	//OIS_Data3[2] = 0xDE;
+	//ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
+	//IIC_Delayus(d);
+	//ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	//ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+	//hall = DecData[0] * 256 + DecData[1];
+	//if (hall > 0x7FFF)
+	//	hall = hall - 65536;
+	//script_log << hall << "	";
 
-	OIS_Data3[1] = 0x61;
-	OIS_Data3[2] = 0xE0;
-	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
-	IIC_Delayus(d);
-	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
-	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
-	hall = DecData[0] * 256 + DecData[1];
-	if (hall > 0x7FFF)
-		hall = hall - 65536;
+	//OIS_Data3[1] = 0x61;
+	//OIS_Data3[2] = 0xE0;
+	//ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
+	//IIC_Delayus(d);
+	//ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	//ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+	//hall = DecData[0] * 256 + DecData[1];
+	//if (hall > 0x7FFF)
+	//	hall = hall - 65536;
 	script_log << hall << "	" << endl;
 	return 0;
 }
@@ -3042,6 +3057,140 @@ void AFDRVCheck::on_pushButton_BU24532_Iris_off_clicked() {
 	ui->log->insertPlainText(str.c_str());
 }
 
+
+int AFDRVCheck::BU24631_hall_read() {
+	unsigned char OIS_Data3[5] = { 0x78,0x60,0x60,0,0 }, OIS_slave_Read = 0x79;;
+	int ack = 0;	float d = 0;
+	OIS_Data3[1] = 0x60;
+	OIS_Data3[2] = 0x60;
+	OIS_Data3[3] = 0x00;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
+	IIC_Delayus(d);
+	OIS_Data3[2] = 0x62;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
+	IIC_Delayus(d);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+	int hall = DecData[0] * 256 + DecData[1];
+	if (hall > 0x7FFF)
+		hall = hall - 65536;
+	script_log << hall << "	";
+
+	OIS_Data3[2] = 0x60;
+	OIS_Data3[3] = 0x01;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
+	IIC_Delayus(d);
+	OIS_Data3[2] = 0x62;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
+	IIC_Delayus(d);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+	hall = DecData[0] * 256 + DecData[1];
+	if (hall > 0x7FFF)
+		hall = hall - 65536;
+	script_log << hall << "	";
+
+	OIS_Data3[1] = 0x61;
+	OIS_Data3[2] = 0xDE;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
+	IIC_Delayus(d);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+	hall = DecData[0] * 256 + DecData[1];
+	if (hall > 0x7FFF)
+		hall = hall - 65536;
+	script_log << hall << "	";
+
+	OIS_Data3[1] = 0x61;
+	OIS_Data3[2] = 0xE0;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
+	IIC_Delayus(d);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+	hall = DecData[0] * 256 + DecData[1];
+	if (hall > 0x7FFF)
+		hall = hall - 65536;
+	script_log << hall << "	" << endl;
+	return 0;
+}
+
+int AFDRVCheck::Rohm_Statu_check() {
+
+	unsigned char OIS_Data[5] = { 0x78,0x60,0x24,0,0 }, OIS_slave_Read = 0x79;;
+	int ack = 0;
+	int k = 0;
+	while (k < 1000) {
+
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 3);
+		ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+		DecData[0] = 0;
+		ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 1);
+		if (DecData[0])
+			break;
+		k++;
+		IIC_Delayus(0.001);
+	}
+	return DecData[0];
+}
+
+void AFDRVCheck::on_pushButton_BU24631_Sine_clicked() {
+
+	int offsetX = ui->decenter_BU24721X->document()->toPlainText().toInt();
+	int offsetY = ui->decenter_BU24721Y->document()->toPlainText().toInt();
+
+	script_log.open(".\\test_log.txt");
+	int ack = 0, e = 0, N = 3;
+	unsigned char OIS_Data[5] = { 0x78,0x60,0x20,0x01,0 }, OIS_slave_Read = 0x79;
+	OIS_range_ratio = ui->OIS_range->document()->toPlainText().toInt();
+	float d = 0.001;
+	unsigned char OIS_Data3[4] = { 0x78,0x61,0x7D,1 };
+	unsigned char OIS_Data1[5] = { 0x78,0x61,0xDC,0x03,0 };
+
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
+	IIC_Delayus(0.1);
+	Rohm_Statu_check();
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 4);
+	IIC_Delayus(0.01);
+	Rohm_Statu_check();
+
+	OIS_Data[3] = 7;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
+	IIC_Delayus(0.01);
+	Rohm_Statu_check();
+
+	for (int x = 0; x < N; x++) {
+		for (int a = 0; a < 256; a++) {
+			ack = 0;
+			float d = sin(3.1415926*a / 128);
+			short pos = d * 1023 * OIS_range_ratio / 100.0+ offsetX;
+
+			OIS_Data3[1] = 0x60;
+			OIS_Data3[2] = 0xB0;  //X:0xB0   Y:0xB2
+			OIS_Data3[3] = pos >> 8;
+			OIS_Data3[4] = pos & 0xFF;
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 5);
+
+			float d1 = cos(3.1415926*a / 128);
+			pos = d1 * 1023 * OIS_range_ratio / 100.0+ offsetY;
+			OIS_Data3[1] = 0x60;
+			OIS_Data3[2] = 0xB2;  ///X:0xB0   Y:0xB2
+			OIS_Data3[3] = pos >> 8;
+			OIS_Data3[4] = pos & 0xFF;
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 5);
+
+			if(x==0&&a==0)	IIC_Delayus(0.5);
+
+			IIC_Delayus(0.005);
+			int k = 0;
+			if (Rohm_Statu_check());
+
+			BU24631_hall_read();
+		}
+	}
+	ui->log->insertPlainText("BU24631 Sine test \n");
+	script_log.close();
+}
 
 void AFDRVCheck::on_pushButton_7323_clicked() {
 
@@ -3836,7 +3985,7 @@ void AFDRVCheck::on_pushButton_AW86006_Read_clicked() {
 	int ret = 0, ack=0;
 	string str; INT16 hall[2];
 	ret = AwServeOn();
-	ret = AwFlashUpdate();
+	//ret = AwFlashUpdate();
 	AW_read_Data();
 	ret = AwReadAdc(hall);
 
@@ -3914,6 +4063,10 @@ void AFDRVCheck::AW_read_Data() {
 	fout << str;
 	str = "fHallMinY: " + to_string(caldata.fHallMinY) + "\n";
 	fout << str;
+	str = "fLoopGainX: " + to_string(caldata.fLoopGainX) + "\n";
+	fout << str;
+	str = "fLoopGainY: " + to_string(caldata.fLoopGainY) + "\n";
+	fout << str;
 	str = "fGyroGainX: " + to_string(caldata.fGyroGainX) + "\n";
 	fout << str;
 	str = "fGyroGainY: " + to_string(caldata.fGyroGainY) + "\n";
@@ -3943,7 +4096,7 @@ void AFDRVCheck::AW_read_Data() {
 	fout << endl;
 
 	fout << "fLinearityXK:	";
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 9; i++) 
 		fout << caldata.fLinearityXK[i] << "	";
 	fout << endl;
 
