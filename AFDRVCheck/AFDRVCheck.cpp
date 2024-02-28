@@ -1837,7 +1837,7 @@ void AFDRVCheck::on_pushButton_script_clicked() {
 		}
 		int ack = 0; unsigned char Temp[256] = { 0 };
 		if (len > 0){
-			if (D[0][0] == 'R' || D[0][1] == 'R') {
+			if (D[0][0] == 'R' && D[0][1] == 'R') {
 				if (ui->Cphy->isChecked()) {
 					ack += DG_I2cRead(I2C.m_hCapture, 1, Temp, DecData[1]);
 				}
@@ -1869,6 +1869,12 @@ void AFDRVCheck::on_pushButton_script_clicked() {
 					Value_GPIOwrite = DG_GpioWrite(pHdg, 0xFFFFFFFF, sum);
 				}
 				on_pushButton_GPIO_read_clicked();
+			}
+			else if (D[0][0] == 'P' && D[0][1] == 'S') {
+				ack += DG_SetIsmReset(pHdg, 0);
+				Delay(100);
+				ack += DG_SetIsmReset(pHdg, 1);
+
 			}
 			else {
 				DecData[e + 1] = 0;
@@ -3140,7 +3146,7 @@ void AFDRVCheck::on_pushButton_BU24631_Sine_clicked() {
 	int offsetY = ui->decenter_BU24721Y->document()->toPlainText().toInt();
 
 	script_log.open(".\\test_log.txt");
-	int ack = 0, e = 0, N = 3;
+	int ack = 0, e = 0, N = 5;
 	unsigned char OIS_Data[5] = { 0x78,0x60,0x20,0x01,0 }, OIS_slave_Read = 0x79;
 	OIS_range_ratio = ui->OIS_range->document()->toPlainText().toInt();
 	float d = 0.001;
@@ -3160,9 +3166,9 @@ void AFDRVCheck::on_pushButton_BU24631_Sine_clicked() {
 	Rohm_Statu_check();
 
 	for (int x = 0; x < N; x++) {
-		for (int a = 0; a < 256; a++) {
+		for (int a = 0; a < 50; a++) {
 			ack = 0;
-			float d = sin(3.1415926*a / 128);
+			float d = sin(3.1415926*a / 25);
 			short pos = d * 1023 * OIS_range_ratio / 100.0+ offsetX;
 
 			OIS_Data3[1] = 0x60;
@@ -3170,8 +3176,8 @@ void AFDRVCheck::on_pushButton_BU24631_Sine_clicked() {
 			OIS_Data3[3] = pos >> 8;
 			OIS_Data3[4] = pos & 0xFF;
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 5);
-
-			float d1 = cos(3.1415926*a / 128);
+			IIC_Delayus(0.001);
+			float d1 = cos(3.1415926*a / 25);
 			pos = d1 * 1023 * OIS_range_ratio / 100.0+ offsetY;
 			OIS_Data3[1] = 0x60;
 			OIS_Data3[2] = 0xB2;  ///X:0xB0   Y:0xB2
@@ -3179,14 +3185,24 @@ void AFDRVCheck::on_pushButton_BU24631_Sine_clicked() {
 			OIS_Data3[4] = pos & 0xFF;
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 5);
 
-			if(x==0&&a==0)	IIC_Delayus(0.5);
+			if(x==0&&a==0)	IIC_Delayus(0.2);
 
-			IIC_Delayus(0.005);
+			IIC_Delayus(0.004);
 			int k = 0;
-			if (Rohm_Statu_check());
-
+			//Rohm_Statu_check();
 			BU24631_hall_read();
 		}
+	}
+	ui->log->insertPlainText("BU24631 Sine test \n");
+	script_log.close();
+}
+
+void AFDRVCheck::on_pushButton_BU24631_Read_clicked() {
+
+	script_log.open(".\\test_log.txt");
+	for (int x = 0; x < 2000; x++) {
+		BU24631_hall_read();
+		IIC_Delayus(0.005);
 	}
 	ui->log->insertPlainText("BU24631 Sine test \n");
 	script_log.close();

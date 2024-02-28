@@ -78,6 +78,7 @@ public slots:
 
 	int BU24631_hall_read();
 	void on_pushButton_BU24631_Sine_clicked();
+	void on_pushButton_BU24631_Read_clicked();
 
 	void on_pushButton_DW1_clicked();
 	void on_pushButton_DW2_clicked();

@@ -26,7 +26,7 @@
    <bool>true</bool>
   </property>
   <property name="windowTitle">
-   <string>EnvyLogic Controller_20230714</string>
+   <string>EnvyLogic Controller_20240108</string>
   </property>
   <widget class="QPushButton" name="pushButton_read">
    <property name="geometry">
@@ -1461,6 +1461,22 @@ p, li { white-space: pre-wrap; }
       <bool>false</bool>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton_BU24631_Read">
+     <property name="geometry">
+      <rect>
+       <x>204</x>
+       <y>84</y>
+       <width>100</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>BU24631 Read</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_4">
     <attribute name="title">
@@ -2237,9 +2253,9 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup_3"/>
-  <buttongroup name="buttonGroup_4"/>
  </buttongroups>
 </ui>
