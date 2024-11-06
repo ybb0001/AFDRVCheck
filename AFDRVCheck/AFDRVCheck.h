@@ -60,6 +60,9 @@ public slots:
 	void on_pushButton_puya_clicked();
 	void on_pushButton_SEM1215_Current_clicked();
 	void on_pushButton_SEM1217_Read_clicked();
+	void on_pushButton_SEM1217_Sine_clicked();
+
+	int SEM1217_hall_read();
 
 	void on_pushButton_BU24721_clicked();
 	void on_pushButton_BU24721_Read_clicked();

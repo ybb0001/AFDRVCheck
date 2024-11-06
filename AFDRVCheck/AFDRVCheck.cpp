@@ -743,6 +743,7 @@ AFDRVCheck::AFDRVCheck(QWidget *parent) :
 	pExtFuncList->pFunc_OutputLog = awOutputLog;
 	AW86006.OIS_ExtFuncInit(pExtFuncList);
 	load_Setting();
+	on_pushButton_Cphy_clicked();
 }
 
 int pDeviceInfoCount = 0;
@@ -2011,7 +2012,6 @@ void AFDRVCheck::on_pushButton_DW2_clicked() {
 	int hall_range = 2048 * OIS_range_ratio / 100;
 
 	for (int x = 0; x < N; x++) {
-
 		for (int a = 0; a < 200; a++) {
 			ack = 0;
 			float d = sin(3.1415926*a / 100);
@@ -3212,7 +3212,7 @@ void AFDRVCheck::on_pushButton_7323_clicked() {
 
 	ofstream script_log(".\\hall_log.txt");
 	ofstream test_log(".\\target_log.txt");
-	int ack = 0, e = 0, N = 5, hall = 0, X_center = 0x8000, Y_center = 0x8000;
+	int ack = 0, e = 0, N = 1, hall = 0, X_center = 0x800, Y_center = 0x800;
 
 	unsigned char AKM_Data[3] = { 0x1C,0,0x80 }, Read_slave = 0x1D;
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, AKM_Data,3);
@@ -3232,74 +3232,82 @@ void AFDRVCheck::on_pushButton_7323_clicked() {
 	AKM_Data[0] = 0x1C;
 	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, AKM_Data, 3);
 
-	Sleep(500);
+	Sleep(200);
 	OIS_range_ratio = 80;
-	int hall_range = 0x8000 * OIS_range_ratio / 100.0;
+	int hall_range = 0x800 * OIS_range_ratio / 100.0;
 
 	int hall_data[25600][2] = { 0 }, target_data[25600][2] = { 0 }, n = 0;
 
+	///////////////init POS
+	int a = 0;
+	float d = sin(3.1415926*a / 128);
+	int m = d * hall_range + X_center;
+	//			test_log << m << "	"; 
+	target_data[n][0] = m;
+
+	unsigned char DW_Data1[4] = { 0x1C,0x00,(unsigned char)(m / 128) };
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data1, 3);
+	DW_Data1[1] = 1;
+	DW_Data1[2] = m % 256;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data1, 3);
+
+	d = cos(3.1415926*a / 128);
+	int m1 = d * hall_range + Y_center;
+	//			test_log << m1 << endl;
+	target_data[n][1] = m1;
+
+	unsigned char DW_Data2[4] = { 0x9C,0x00,(unsigned char)(m1 / 128) };
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data2, 3);
+	DW_Data2[1] = 1;
+	DW_Data2[2] = m1 % 256;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data2, 3);
+
+	Sleep(200);
+	///////////////init POS
+
+
 	for (int x = 0; x < N; x++) {
-		for (int a = 0; a < 256; a++) {
+		for (a = 0; a < 256; a++) {
 			ack = 0;
-			float d = sin(3.1415926*a / 128);
-			int m = d * hall_range + X_center;
+			d = sin(3.1415926*a / 128);
+			m = d * hall_range + X_center;
 //			test_log << m << "	"; 
 			target_data[n][0] = m;
+			DW_Data1[0] = 0x1C;
+			DW_Data1[1] = 0;
+			DW_Data1[2] = (unsigned char)(m / 128);
+			DW_Data1[3] = (unsigned char)(m % 256);
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data1, 4);
 
-			unsigned char DW_Data1[3] = { 0x1C,0x00,(unsigned char)(m / 128) };
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data1, 3);
-			DW_Data1[1] = 1;
-			DW_Data1[2] = m % 256;
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data1, 3);
-
-			d = sin(3.1415926*a / 128);
-			int m1 = d * hall_range + Y_center;
-//			test_log << m1 << endl;
+			d = cos(3.1415926*a / 128);
+			m1 = d * hall_range + Y_center;
 			target_data[n][1] = m1;
+			DW_Data2[0] = 0x9C;
+			DW_Data2[1] = 0;
+			DW_Data2[2] =(unsigned char)(m1 / 128);
+			DW_Data2[3] = (unsigned char)(m1 % 256);
+			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data2, 4);
 
-			unsigned char DW_Data2[3] = { 0x9C,0x00,(unsigned char)(m1 / 128) };
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data2, 3);
-			DW_Data2[1] = 1;
-			DW_Data2[2] = m1 % 256;
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data2, 3);
-			Sleep(1);
-
+			IIC_Delayus(0.002);
+			// read
 			Read_slave = 0x1D; 
 			unsigned short X_hall = 0, Y_hall = 0;
 			unsigned char DW_Data3[2] = { 0x1C,0x84};
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3,2);
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
-			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 1);
-			X_hall += DecData[0] * 256;
-			DW_Data3[1] = 0x85;
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 2);
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
-			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 1);
-			X_hall += DecData[0];
-			hall_data[n][0] = X_hall;
-
-	//		if (X_hall > 32767)
-	//			X_hall = X_hall - 65536;
-
-	//		script_log << X_hall << "	";
+			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+			hall_data[n][0] = DecData[0] * 256+ DecData[1];
+			if (hall_data[n][0] > 32767) hall_data[n][0] = hall_data[n][0] - 0x10000;
 
 			Read_slave = 0x9D;
 			DW_Data3[0] = 0x9C;
 			DW_Data3[1] = 0x84;
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 2);
 			ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
-			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 1);
-			Y_hall += DecData[0] * 256;
-			DW_Data3[1] = 0x85;
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, DW_Data3, 2);
-			ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &Read_slave, 1);
-			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 1);
-			Y_hall += DecData[0];
-			hall_data[n][1] = Y_hall;
-	//		if (Y_hall > 32767)
-	//			Y_hall = Y_hall - 65536;
+			ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+			hall_data[n][1] = DecData[0] * 256 + DecData[1];
+			if (hall_data[n][1] > 32767) hall_data[n][1] = hall_data[n][1] - 0x10000;
 
-	//		script_log << Y_hall << endl;
 			n++;
 		}
 	}
@@ -3457,6 +3465,83 @@ void AFDRVCheck::on_pushButton_SEM1217_Read_clicked() {
 
 }
 
+int AFDRVCheck::SEM1217_hall_read() {
+
+
+	unsigned char OIS_Data3[5] = { 0xC2,0x0B,0x10,0,0 }, OIS_slave_Read = 0xC3;;
+	int ack = 0;	float d = 0;
+
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
+	IIC_Delayus(d);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+	int hall = DecData[0] + DecData[1] * 256;
+	if (hall > 0x7FFF)
+		hall = hall - 65536;
+	script_log << hall << "	";
+
+	OIS_Data3[2] = 0x12;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data3, 3);
+	IIC_Delayus(d);
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 0, &OIS_slave_Read, 1);
+	ack += DG_I2cRead(I2C.m_hCapture, 1, DecData, 2);
+
+	hall = DecData[0] + DecData[1] * 256;
+	if (hall > 0x7FFF)
+		hall = hall - 65536;
+	
+	script_log << hall << "	" << endl;
+	return 0;
+}
+
+void AFDRVCheck::on_pushButton_SEM1217_Sine_clicked() {
+	OIS_range_ratio = ui->OIS_range->document()->toPlainText().toInt();
+
+	script_log.open("test_log.txt");
+	int ack = 0, hall = 0, N=5; string s;
+	unsigned char OIS_Data[5] = { 0xC2,0x00,0x00,0x01,0 }, OIS_slave_Read = 0xC3;
+
+	OIS_Data[2] = 0x00;
+	OIS_Data[3] = 0x01;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
+	IIC_Delayus(0.05);
+
+	OIS_Data[2] = 0x02;
+	OIS_Data[3] = 0x0C;
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
+	IIC_Delayus(0.1);
+
+	OIS_Data[1] = 0x07;
+	OIS_Data[2] = 0x05;
+	OIS_Data[3] = 0x04;  //4 Hz
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
+	OIS_Data[1] = 0x07;
+	OIS_Data[2] = 0x06;
+	OIS_Data[3] = OIS_range_ratio/100.0*200;  // AMP default 0x1E
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
+
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
+	OIS_Data[1] = 0x07;
+	OIS_Data[2] = 0x04;
+	OIS_Data[3] = 0x03;  // bit0 X ,bit1 Y
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
+	
+	OIS_Data[1] = 0x0B;
+	OIS_Data[2] = 0x00;
+	OIS_Data[3] = 0x01;  // monitor on
+	ack += DG_I2cWrite(I2C.m_hCapture, 1, 1, OIS_Data, 4);
+
+	IIC_Delayus(0.1);
+
+	for (int x = 0; x < N; x++) {
+		for (int a = 0; a < 256; a++) {
+			IIC_Delayus(0.002);
+			SEM1217_hall_read();
+		}
+	}
+	ui->log->insertPlainText("BU24532 Sine Test \n");
+	script_log.close();
+}
 
 void AFDRVCheck::on_pushButton_CH1_clicked() {
 

@@ -128,6 +128,7 @@ public:
     QPushButton *pushButton_BU24721_Drive;
     QPushButton *pushButton_BU24532_Life;
     QPushButton *pushButton_BU24631_Sine;
+    QPushButton *pushButton_BU24631_Read;
     QWidget *tab_4;
     QPushButton *pushButton_DW2;
     QPushButton *pushButton_DW1;
@@ -144,6 +145,7 @@ public:
     QPushButton *pushButton_SEM1215_Current;
     QPushButton *pushButton_SEM1215_Ver;
     QPushButton *pushButton_SEM1217_Read;
+    QPushButton *pushButton_SEM1217_Sine;
     QWidget *tab_8;
     QPushButton *pushButton_AW86006_init;
     QPushButton *pushButton_AW86006_FW;
@@ -178,9 +180,9 @@ public:
     QPushButton *pushButton_AF_Aging;
     QPushButton *pushButton_save;
     QButtonGroup *buttonGroup;
-    QButtonGroup *buttonGroup_2;
     QButtonGroup *buttonGroup_3;
     QButtonGroup *buttonGroup_4;
+    QButtonGroup *buttonGroup_2;
 
     void setupUi(QWidget *EEPROM)
     {
@@ -420,11 +422,12 @@ public:
         buttonGroup->addButton(Dphy);
         Dphy->setObjectName(QStringLiteral("Dphy"));
         Dphy->setGeometry(QRect(20, 180, 61, 16));
-        Dphy->setChecked(true);
+        Dphy->setChecked(false);
         Cphy = new QRadioButton(EEPROM);
         buttonGroup->addButton(Cphy);
         Cphy->setObjectName(QStringLiteral("Cphy"));
         Cphy->setGeometry(QRect(20, 200, 81, 16));
+        Cphy->setChecked(true);
         CH0 = new QRadioButton(EEPROM);
         buttonGroup_2 = new QButtonGroup(EEPROM);
         buttonGroup_2->setObjectName(QStringLiteral("buttonGroup_2"));
@@ -532,6 +535,10 @@ public:
         pushButton_BU24631_Sine->setObjectName(QStringLiteral("pushButton_BU24631_Sine"));
         pushButton_BU24631_Sine->setGeometry(QRect(204, 55, 100, 30));
         pushButton_BU24631_Sine->setCheckable(false);
+        pushButton_BU24631_Read = new QPushButton(tab_3);
+        pushButton_BU24631_Read->setObjectName(QStringLiteral("pushButton_BU24631_Read"));
+        pushButton_BU24631_Read->setGeometry(QRect(204, 84, 100, 30));
+        pushButton_BU24631_Read->setCheckable(false);
         tabWidget->addTab(tab_3, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
@@ -592,6 +599,10 @@ public:
         pushButton_SEM1217_Read->setObjectName(QStringLiteral("pushButton_SEM1217_Read"));
         pushButton_SEM1217_Read->setGeometry(QRect(100, 0, 100, 30));
         pushButton_SEM1217_Read->setCheckable(false);
+        pushButton_SEM1217_Sine = new QPushButton(tab_7);
+        pushButton_SEM1217_Sine->setObjectName(QStringLiteral("pushButton_SEM1217_Sine"));
+        pushButton_SEM1217_Sine->setGeometry(QRect(100, 30, 100, 30));
+        pushButton_SEM1217_Sine->setCheckable(false);
         tabWidget->addTab(tab_7, QString());
         tab_8 = new QWidget();
         tab_8->setObjectName(QStringLiteral("tab_8"));
@@ -783,7 +794,7 @@ public:
 
         retranslateUi(EEPROM);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(EEPROM);
@@ -791,7 +802,7 @@ public:
 
     void retranslateUi(QWidget *EEPROM)
     {
-        EEPROM->setWindowTitle(QApplication::translate("EEPROM", "EnvyLogic Controller_20230714", Q_NULLPTR));
+        EEPROM->setWindowTitle(QApplication::translate("EEPROM", "EnvyLogic Controller_20241104", Q_NULLPTR));
         pushButton_read->setText(QApplication::translate("EEPROM", "Read", Q_NULLPTR));
         label->setText(QApplication::translate("EEPROM", "Check Result", Q_NULLPTR));
         pushButton_write->setText(QApplication::translate("EEPROM", "Write", Q_NULLPTR));
@@ -940,6 +951,7 @@ public:
         pushButton_BU24721_Drive->setText(QApplication::translate("EEPROM", "BU24721 Drive", Q_NULLPTR));
         pushButton_BU24532_Life->setText(QApplication::translate("EEPROM", "BU24532 Life", Q_NULLPTR));
         pushButton_BU24631_Sine->setText(QApplication::translate("EEPROM", "BU24631 Sine", Q_NULLPTR));
+        pushButton_BU24631_Read->setText(QApplication::translate("EEPROM", "BU24631 Read", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("EEPROM", "ROHM", Q_NULLPTR));
         pushButton_DW2->setText(QApplication::translate("EEPROM", "DW9781 Cls Sin", Q_NULLPTR));
         pushButton_DW1->setText(QApplication::translate("EEPROM", "DW9781 Open Sin", Q_NULLPTR));
@@ -956,6 +968,7 @@ public:
         pushButton_SEM1215_Current->setText(QApplication::translate("EEPROM", "SEM1215_Current", Q_NULLPTR));
         pushButton_SEM1215_Ver->setText(QApplication::translate("EEPROM", "SEM1215_Ver", Q_NULLPTR));
         pushButton_SEM1217_Read->setText(QApplication::translate("EEPROM", "SEM1217_Read", Q_NULLPTR));
+        pushButton_SEM1217_Sine->setText(QApplication::translate("EEPROM", "SEM1217_Sine", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("EEPROM", "SEM", Q_NULLPTR));
         pushButton_AW86006_init->setText(QApplication::translate("EEPROM", "AW86006 Init", Q_NULLPTR));
         pushButton_AW86006_FW->setText(QApplication::translate("EEPROM", "AW86006 FW Down", Q_NULLPTR));
